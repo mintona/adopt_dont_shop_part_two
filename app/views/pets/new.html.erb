@@ -1,0 +1,23 @@
+<h1>Add a Pet</h1>
+
+<%= form_tag "/shelters/#{@shelter_id}/pets" do %>
+  <%= label_tag :image %>
+  <%= text_field_tag :image %><br>
+
+  <%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+
+  <%= label_tag :description %>
+  <%= text_field_tag :description %><br>
+
+  <%= label_tag :approximate_age %>
+  <%= text_field_tag :approximate_age %><br>
+
+  <%= label_tag :sex %>
+  <%= select_tag :sex, options_for_select(['Male', 'Female']) %>
+  <br>
+  <br>
+  <%= submit_tag 'Add Pet', class: "button" %>
+
+
+<% end %>

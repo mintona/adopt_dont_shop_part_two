@@ -1,0 +1,120 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ /* img {
+   width: 580px;
+   height: 386px;
+   border-radius: 8px;
+ } */
+
+ body {
+  font-family: Arial, Helvetica, sans-sans-serif;
+  padding: 20px;
+  background-color: #EFEEEE;
+  /* color: #999999; */
+}
+
+ img {
+   /* width: 580px;
+   height: 386px; */
+   width:100%;
+   max-width: 400px;
+   height:100;
+   max-height: 200px;
+   border-radius: 10px;
+   padding: 5px;
+ }
+
+nav {
+  /* background-color: #999999; */
+  background: #98AEB3;
+  height:25px;
+  text-align: right;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+
+nav > a:visited {
+  color:white;
+}
+
+nav > a:hover {
+  color:hotpink;
+}
+
+nav > a {
+  padding: 3px;
+}
+
+
+ a:link {
+   text-decoration: none;
+   color: #98AEB3;
+ }
+
+ a:visited {
+   color: #99917A;
+ }
+
+ a:hover {
+   color: hotpink;
+ }
+
+ .button {
+   background-color: #999999;
+   border-radius: 8px;
+   font-size: 16px;
+   text-align: center;
+   margin: 4px 2px;
+   display: inline-block;
+   color: white;
+   text-shadow: 3px 2px gray;
+   /* border-radius: 30%; */
+ }
+
+ a.shelter-name {
+   font-size: 25px;
+ }
+
+ .pet-grid {
+   padding: 20px;
+   display: grid;
+   grid-gap: 2em;
+   background-color: #EFEEEE;
+   grid-template-columns: auto auto auto;
+
+   /* grid-auto-rows: minmax(100px, 600px);
+   justify-content: center;
+   align-items: center; */
+ }
+
+ /* .pet-grid > img{
+   object-fit: cover;
+   width: 50%;
+   max-height: 75%;
+ } */
+
+ .pet-info{
+   padding:20px;
+   background:#DAE6E0;
+   border-radius: 8px;
+   max-width: 250px;
+ }
+
+/* .pet-info:nth-child(odd){
+  background-color: #E8E6D9;
+} */

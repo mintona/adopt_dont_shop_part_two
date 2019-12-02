@@ -1,0 +1,19 @@
+<h1> <%= @pet.name %> </h1>
+
+  <%= image_tag(@pet.image, :alt => "#{@pet.name} image") %>
+
+  <p><b>Description:</b> <%= @pet.description %> <p>
+
+  <p><b>Age:</b> <%= @pet.approximate_age %> </p>
+  <p><b>Sex:</b> <%= @pet.sex %></p>
+  <p><b>Adoption Status:</b>
+    <% if @pet.adoptable %>
+      Adoptable
+      <%= button_to 'Change to Adoption Pending', "/pets/#{@pet.id}/adoptable", method: :patch, class: "button" %>
+      <% else %>
+      Adoption Pending
+      <%= button_to 'Change to Adoptable', "/pets/#{@pet.id}/pending", method: :patch, class: "button" %>
+      <% end %> </p>
+
+<%= button_to 'Update Pet', "/pets/#{@pet.id}/edit", method: :get, class: "button" %>
+<%= button_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "button" %>
