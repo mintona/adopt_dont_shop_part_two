@@ -5,9 +5,7 @@ class ReviewsController < ApplicationController
 
   def create
     review = Review.new(review_params)
-    require "pry"; binding.pry
     review.shelter_id = params[:shelter_id]
-
     review.save!
     redirect_to "/shelters/#{params[:shelter_id]}"
   end
