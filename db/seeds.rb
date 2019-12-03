@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# http://rmpuppyrescue.org/images/1052801_529279620453288_1859974512_o%20(1)172x119_2x.jpg - puppies
+# http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg - doctors
+
 Pet.destroy_all
 Shelter.destroy_all
 
