@@ -10,5 +10,14 @@
 <br>
 <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %>
 
+<section id = "reviews">
 <h2>Reviews</h2>
-<% @shelter.reviews %>
+<% @shelter.reviews.each do |review| %>
+  <section id = "review-<%=review.id%>">
+    <h4><%= review.title %></h4>
+    <h6><%= review.rating %> / 5 paws </h6>
+    <p><%= review.content %></p>
+    <%= image_tag(review.image) %>
+  </section>
+<% end %>
+</section>

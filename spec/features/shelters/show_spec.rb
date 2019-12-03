@@ -51,18 +51,41 @@ RSpec.describe "As a visitor", type: :feature do
     end
 
     it "shows a list of reviews for that shelter" do
+            review_1 = Review.create!(title: "Great shelter!",
+                                      rating: 5,
+                                      content: "I got the best lil pup from this place and the staff was super helpful!",
+                                      image: "http://rmpuppyrescue.org/images/1052801_529279620453288_1859974512_o%20(1)172x119_2x.jpg",
+                                      shelter: @shelter_1)
+
+            review_2 = Review.create!(title: "Cute dogs!",
+                                      rating: 4,
+                                      content: "I got the cutest pit bull, but the front desk lady was kind of mean.",
+                                      image: "http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg",
+                                      shelter: @shelter_1)
+
+            review_3 = Review.create!(title: "The best!",
+                                      rating: 4,
+                                      content: "I love kitty cats",
+                                      image: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat3.jpg",
+                                      shelter: @shelter_2)
+
       visit "/shelters/#{@shelter_1.id}"
 
-      review_1 = Review.create!(title: "Great shelter!",
-                                rating: 5,
-                                content: "I got the best lil pup from this place and the staff was super helpful!",
-                                image: "http://rmpuppyrescue.org/images/1052801_529279620453288_1859974512_o%20(1)172x119_2x.jpg",
-                                shelter: @shelter_1)
-require "pry"; binding.pry
-      expect(page).to have_content(review_1.title)
-      expect(page).to have_content(review_1.rating)
-      expect(page).to have_content(review_1.content)
-      expect(page).to have_content(review_1.image)
+      within "#review-#{review_1.id}" do
+        expect(page).to have_content(review_1.title)
+        expect(page).to have_content(review_1.rating)
+        expect(page).to have_content(review_1.content)
+        expect(page).to have_css("img[src*='#{review_1.image}']")
+      end
+
+      within "#review-#{review_2.id}" do
+        expect(page).to have_content(review_2.title)
+        expect(page).to have_content(review_2.rating)
+        expect(page).to have_content(review_2.content)
+        expect(page).to have_css("img[src*='#{review_2.image}']")
+      end
+
+      expect(page).to_not have_css("#review-#{review_3.id}")
     end
   end
 end
