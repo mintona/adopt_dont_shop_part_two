@@ -12,6 +12,7 @@
 
 <section id = "reviews">
 <h2>Reviews</h2>
+<%= button_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new", method: :get, class: "button" %>
 <% @shelter.reviews.each do |review| %>
   <section id = "review-<%=review.id%>">
     <h4><%= review.title %></h4>
