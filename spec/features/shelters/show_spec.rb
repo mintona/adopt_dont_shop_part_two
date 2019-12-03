@@ -49,5 +49,20 @@ RSpec.describe "As a visitor", type: :feature do
 
       expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets")
     end
+
+    it "shows a list of reviews for that shelter" do
+      visit "/shelters/#{@shelter_1.id}"
+
+      review_1 = Review.create!(title: "Great shelter!",
+                                rating: 5,
+                                content: "I got the best lil pup from this place and the staff was super helpful!",
+                                image: "http://rmpuppyrescue.org/images/1052801_529279620453288_1859974512_o%20(1)172x119_2x.jpg",
+                                shelter: @shelter_1)
+require "pry"; binding.pry
+      expect(page).to have_content(review_1.title)
+      expect(page).to have_content(review_1.rating)
+      expect(page).to have_content(review_1.content)
+      expect(page).to have_content(review_1.image)
+    end
   end
 end
