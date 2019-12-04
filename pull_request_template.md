@@ -1,4 +1,4 @@
-**Fuctionality:**
+**Functionality:**
 
 **Testing:**
 
