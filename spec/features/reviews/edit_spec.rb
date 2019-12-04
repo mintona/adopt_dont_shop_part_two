@@ -66,6 +66,7 @@ RSpec.describe 'As a visitor' do
         click_button 'Update Review'
 
         expect(current_path).to eq("/shelters/#{@shelter_1.id}")
+        expect(page).to have_content('Your review has been updated.')
 
         within "#review-#{@review_1.id}" do
           expect(page).to have_content(new_title)
@@ -81,8 +82,6 @@ RSpec.describe 'As a visitor' do
 
       it "shows an error if I leave a required field blank" do
         new_title = ""
-        # new_rating = 4
-        # new_content = "Staff was very helpful"
         flash = "Please fill out all required fields."
 
         visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
