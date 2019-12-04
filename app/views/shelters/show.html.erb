@@ -20,6 +20,7 @@
     <h6><%= review.rating %> / 5 paws </h6>
     <p><%= review.content %></p>
     <%= image_tag(review.image) %>
+    <%= button_to 'Update Review', "/shelters/#{@shelter.id}/reviews/#{review.id}/edit", method: :get, class: 'button' %>
   </section>
   </section>
 <% end %>
