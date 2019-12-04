@@ -44,37 +44,60 @@ RSpec.describe 'As a visitor' do
     end
   end
 
-  describe 'Once I update the information' do
-    it 'updates the review info and takes me back to shelter show page' do
+  describe 'when I click the update review button for a review' do
+    describe 'it takes me to the review edit page' do
+      it 'updates the review with the info I enter and takes me back to shelter show page' do
 
-      visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
+        visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
 
-      expect(find_field('Title').value).to eq(@review_1_original_title)
-      expect(find_field('Rating').value).to eq(@review_1_original_rating.to_s)
-      expect(find_field('Content').value).to eq(@review_1_original_content)
-      expect(find_field('Image').value).to eq(@review_1_original_image)
+        expect(find_field('Title').value).to eq(@review_1_original_title)
+        expect(find_field('Rating').value).to eq(@review_1_original_rating.to_s)
+        expect(find_field('Content').value).to eq(@review_1_original_content)
+        expect(find_field('Image').value).to eq(@review_1_original_image)
 
-      new_title = "Nice People!"
-      new_rating = 4
-      new_content = "Staff was very helpful"
+        new_title = "Nice People!"
+        new_rating = 4
+        new_content = "Staff was very helpful"
 
-      fill_in 'Title', with: new_title
-      select new_rating, from: :rating
-      fill_in 'Content', with: new_content
+        fill_in 'Title', with: new_title
+        select new_rating, from: :rating
+        fill_in 'Content', with: new_content
 
-      click_button 'Update Review'
+        click_button 'Update Review'
 
-      expect(current_path).to eq("/shelters/#{@shelter_1.id}")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}")
 
-      within "#review-#{@review_1.id}" do
-        expect(page).to have_content(new_title)
-        expect(page).to have_content(new_rating)
-        expect(page).to have_content(new_content)
-        expect(page).to have_css("img[src*='#{@review_1_original_image}']")
+        within "#review-#{@review_1.id}" do
+          expect(page).to have_content(new_title)
+          expect(page).to have_content(new_rating)
+          expect(page).to have_content(new_content)
+          expect(page).to have_css("img[src*='#{@review_1_original_image}']")
 
-        expect(page).to_not have_content(@review_1_original_title)
-        expect(page).to_not have_content(@review_1_original_rating)
-        expect(page).to_not have_content(@review_1_original_content)
+          expect(page).to_not have_content(@review_1_original_title)
+          expect(page).to_not have_content(@review_1_original_rating)
+          expect(page).to_not have_content(@review_1_original_content)
+        end
+      end
+
+      it "shows an error if I leave a required field blank" do
+        new_title = ""
+        # new_rating = 4
+        # new_content = "Staff was very helpful"
+        flash = "Please fill out all required fields."
+
+        visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
+
+        expect(find_field('Title').value).to eq(@review_1_original_title)
+        expect(find_field('Rating').value).to eq(@review_1_original_rating.to_s)
+        expect(find_field('Content').value).to eq(@review_1_original_content)
+        expect(find_field('Image').value).to eq(@review_1_original_image)
+
+        fill_in 'Title', with: new_title
+
+        click_button 'Update Review'
+
+        expect(page).to have_button('Update Review')
+        expect(page).to have_content(flash)
       end
     end
   end
