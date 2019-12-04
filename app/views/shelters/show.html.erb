@@ -21,6 +21,7 @@
     <p><%= review.content %></p>
     <%= image_tag(review.image) %>
     <%= button_to 'Update Review', "/shelters/#{@shelter.id}/reviews/#{review.id}/edit", method: :get, class: 'button' %>
+    <%= button_to 'Delete Review', "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete, class: 'button' %>
   </section>
   </section>
 <% end %>
