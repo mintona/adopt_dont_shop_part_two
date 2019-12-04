@@ -98,17 +98,7 @@ nav > a {
    grid-gap: 2em;
    background-color: #EFEEEE;
    grid-template-columns: auto auto auto;
-
-   /* grid-auto-rows: minmax(100px, 600px);
-   justify-content: center;
-   align-items: center; */
  }
-
- /* .pet-grid > img{
-   object-fit: cover;
-   width: 50%;
-   max-height: 75%;
- } */
 
  .pet-info{
    padding:20px;
@@ -143,6 +133,16 @@ nav > a {
    background-color: #BFF7df;
  }
 
-/* .pet-info:nth-child(odd){
-  background-color: #E8E6D9;
-} */
+ .review-grid {
+   display: grid;
+   grid-gap: 2em;
+   background-color: #EFEEEE;
+   grid-template-columns: 1;
+ }
+
+ .review-info{
+   padding:20px;
+   background:#DAE6E0;
+   border-radius: 8px;
+   max-width: 100%;
+ }

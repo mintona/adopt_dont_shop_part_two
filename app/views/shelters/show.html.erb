@@ -10,15 +10,17 @@
 <br>
 <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %>
 
-<section id = "reviews">
+<section class = "review-grid">
 <h2>Reviews</h2>
 <%= button_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new", method: :get, class: "button" %>
 <% @shelter.reviews.each do |review| %>
   <section id = "review-<%=review.id%>">
+  <section class = "review-info">
     <h4><%= review.title %></h4>
     <h6><%= review.rating %> / 5 paws </h6>
     <p><%= review.content %></p>
     <%= image_tag(review.image) %>
+  </section>
   </section>
 <% end %>
 </section>
