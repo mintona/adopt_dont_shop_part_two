@@ -11,17 +11,7 @@ class SheltersController < ApplicationController
   end
 
   def create
-
-    # shelter = Shelter.new({
-    #   name: params[:name],
-    #   address: params[:address],
-    #   city: params[:city],
-    #   state: params[:state],
-    #   zip: params[:zip]
-    #   })
     shelter = Shelter.create(shelter_params)
-
-    # shelter.save
 
     redirect_to '/shelters'
   end
