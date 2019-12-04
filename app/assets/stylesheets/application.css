@@ -47,6 +47,9 @@ nav {
   border-radius: 4px;
 }
 
+nav > a:link {
+  color:white;
+}
 
 nav > a:visited {
   color:white;
@@ -59,7 +62,6 @@ nav > a:hover {
 nav > a {
   padding: 3px;
 }
-
 
  a:link {
    text-decoration: none;
@@ -113,6 +115,32 @@ nav > a {
    background:#DAE6E0;
    border-radius: 8px;
    max-width: 250px;
+ }
+
+ .flash-notice{
+   color:red;
+   border-color:red;
+ }
+
+ .flash-success{
+   color:green;
+   border:green;
+ }
+
+ p.flash-notice{
+   border-style: outset;
+   border-color: red;
+   padding: 10px;
+   border-radius: 8px;
+   background-color: #FFCCCB;
+ }
+
+ p.flash-success{
+   border-style: outset;
+   border-color: green;
+   padding: 10px;
+   border-radius: 8px;
+   background-color: #BFF7df;
  }
 
 /* .pet-info:nth-child(odd){

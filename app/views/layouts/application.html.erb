@@ -15,9 +15,11 @@
     </nav>
 
     <% flash.each do |type, message| %>
-      <%= message %>
+    <section class = "flash-<%=type%>">
+      <p class = "flash-<%=type%>"><%= message %></p>
+    </section>
     <% end  %>
-    
+
     <%= yield %>
 
   </body>
