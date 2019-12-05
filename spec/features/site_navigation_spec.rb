@@ -49,5 +49,21 @@ RSpec.describe "As a visitor", type: :feature do
         end
       end
     end
+
+    it "I see a favorite indicator in my navigation bar" do
+      paths = ['/',
+      '/shelters',
+      "/shelters/#{@shelter.id}",
+      '/pets',
+      "/pets/#{@pet.id}",
+      "/shelters/#{@shelter.id}/pets"]
+
+      paths.each do |path|
+        visit path
+        within(:css, 'nav') do
+          expect(page).to have_content('Favorite Pets: 0')
+        end
+      end
+    end
   end
 end
