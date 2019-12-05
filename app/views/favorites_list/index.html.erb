@@ -1,5 +1,9 @@
 <h1>All Favorite Pets</h1>
 
+<% if @pets.empty? %>
+  <h3>You haven't added any pets to your Favorite Pets yet.</h3>
+<% end %>
+
 <section class="pet-grid">
   <% @pets.each do |pet| %>
   <section class="pet-info">
