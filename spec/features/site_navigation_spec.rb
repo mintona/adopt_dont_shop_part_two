@@ -61,7 +61,7 @@ RSpec.describe "As a visitor", type: :feature do
       paths.each do |path|
         visit path
         within(:css, 'nav') do
-          expect(page).to have_content('Favorite Pets:')
+          expect(page).to have_content('Favorite Pets: 0')
         end
       end
     end
