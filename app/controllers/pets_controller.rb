@@ -1,6 +1,7 @@
 class PetsController < ApplicationController
 
   def index
+
     if params[:shelter_id]
       @shelter = Shelter.find(params[:shelter_id])
       @pets = @shelter.pets
@@ -11,6 +12,7 @@ class PetsController < ApplicationController
 
   def show
     @pet = Pet.find(params[:id])
+    @favorites_list = FavoritesList.new(session[:favorites_list])
   end
 
   def new
