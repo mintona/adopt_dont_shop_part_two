@@ -37,4 +37,14 @@ RSpec.describe "When a user adds pets to their favorite list" do
 
     expect(page).to have_content("Favorite Pets: 1")
   end
+
+  it "the button to favorite a pet on it's show page is replaced by a button to remove from favorites" do
+    visit "/pets/#{@pet.id}"
+
+    click_button 'Add to Favorite Pets'
+
+    expect(page).to_not have_button('Add to Favorite Pets')
+
+    expect(page).to have_button('Remove from Favorite Pets')
+  end
 end
