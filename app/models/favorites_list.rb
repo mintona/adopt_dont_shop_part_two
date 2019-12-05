@@ -16,4 +16,8 @@ class FavoritesList
   def count_of(pet_id)
     @contents[pet_id.to_s].to_i
   end
+
+  def has_pet?(pet_id)
+    @contents.keys.include?(pet_id.to_s)
+  end
 end
