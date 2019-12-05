@@ -39,8 +39,12 @@ RSpec.describe "As a visitor" do
       visit '/favorites'
 
       # have message for no favorite pets yet
-      expect(page).to_not have_css("#pet-#{@pet_1.id}")
-      expect(page).to_not have_css("#pet-#{@pet_2.id}")
+      expect(page).to_not have_content("#{@pet_1.name}")
+      expect(page).to_not have_content("#{@pet_2.name}")
+
+      expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+      expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
+
 
       visit "/pets/#{@pet_1.id}"
 
