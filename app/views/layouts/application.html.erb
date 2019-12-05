@@ -10,8 +10,11 @@
 
   <body>
     <nav>
+      <p>
       <%= link_to 'All Pets', '/pets' %>
       <%= link_to 'All Shelters', '/shelters' %>
+      Favorite Pets:
+      </p>
     </nav>
 
     <% flash.each do |type, message| %>
