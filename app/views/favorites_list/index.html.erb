@@ -1,0 +1,12 @@
+<h1>All Favorite Pets</h1>
+
+<section class="pet-grid">
+  <% @pets.each do |pet| %>
+  <section class="pet-info">
+  <section id=<%= "pet-#{pet.id}"%>>
+    <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
+    <%= image_tag(pet.image, :alt => "#{pet.name} image") %>
+  </section>
+  </section>
+  <% end %>
+</section>

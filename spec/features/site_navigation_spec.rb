@@ -65,5 +65,22 @@ RSpec.describe "As a visitor", type: :feature do
         end
       end
     end
+
+    it 'I can click on favorite indicator to go to favorites index' do
+      paths = ['/',
+      '/shelters',
+      "/shelters/#{@shelter.id}",
+      '/pets',
+      "/pets/#{@pet.id}",
+      "/shelters/#{@shelter.id}/pets"]
+
+      paths.each do |path|
+        visit path
+        within(:css, 'nav') do
+          click_link "Favorite Pets:"
+          expect(current_path).to eq('/favorites')
+        end
+      end
+    end
   end
 end
