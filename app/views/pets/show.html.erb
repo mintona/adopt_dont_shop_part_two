@@ -15,7 +15,11 @@
       <%= button_to 'Change to Adoptable', "/pets/#{@pet.id}/pending", method: :patch, class: "button" %>
       <% end %> </p>
 
+    <% if !favorites_list.has_pet?(@pet.id) %>
+      <%= button_to 'Add to Favorite Pets', "/favorites/#{@pet.id}", method: :patch, class: "button" %>
+    <% else %>
+      <%= button_to 'Remove from Favorite Pets', "/favorites/#{@pet.id}", method: :delete, class: "button" %>
+    <% end %>
 
-<%= button_to 'Add to Favorite Pets', "/favorites_list/#{@pet.id}", method: :patch, class: "button" %>
 <%= button_to 'Update Pet', "/pets/#{@pet.id}/edit", method: :get, class: "button" %>
 <%= button_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "button" %>
