@@ -6,6 +6,7 @@
   <section id=<%= "pet-#{pet.id}"%>>
     <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
     <%= image_tag(pet.image, :alt => "#{pet.name} image") %>
+    <%= button_to 'Remove from Favorite Pets', "/favorites/#{pet.id}", method: :delete, class: 'button' %>
   </section>
   </section>
   <% end %>
