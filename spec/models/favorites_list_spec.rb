@@ -62,8 +62,10 @@ RSpec.describe FavoritesList do
       expect(favorites_list.has_pet?(pet_2.id)).to eq(false)
 
       favorites_list.add_pet(pet_1.id)
+      favorites_list.add_pet(pet_2.id)
 
       expect(favorites_list.has_pet?(pet_1.id)).to eq(true)
+      expect(favorites_list.has_pet?(pet_2.id)).to eq(true)
     end
   end
 end
