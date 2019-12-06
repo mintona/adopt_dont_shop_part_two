@@ -1,0 +1,9 @@
+<h1>Apply for Adoption</h1>
+
+<%= label_tag :favorited_pets %><br>
+<% @pets.each do |pet| %>
+<section id="pet-<%= pet.id %>">
+  <%= pet.name %>
+  <%= check_box_tag "#{pet.name}", id: 'checkbox' %>
+</section>
+<% end %>
