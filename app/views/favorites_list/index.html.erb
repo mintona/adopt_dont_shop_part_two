@@ -3,6 +3,7 @@
 <% if @pets.empty? %>
   <h3>You haven't added any pets to your Favorite Pets yet.</h3>
 <% else %>
+  <%= button_to 'Apply for Adoption', '/applications/new', method: :get, class: 'button' %>
   <%= button_to 'Remove All Pets from Favorites', "/favorites", method: :delete, class: 'button' %>
 <% end %>
 
