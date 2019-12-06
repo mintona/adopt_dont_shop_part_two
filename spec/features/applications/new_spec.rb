@@ -58,7 +58,7 @@ RSpec.describe 'As a visitor' do
   end
 
   describe 'After I click the link to make a new application' do
-    it "I see my favorites I am able to select" do
+    it "I see my favorites and I am able to select them" do
       visit '/applications/new'
       # save_and_open_page
         check "#{@pet_1.name}"
@@ -68,8 +68,30 @@ RSpec.describe 'As a visitor' do
       # check "#{@pet_2.name}", from: :favorited_pets
     end
 
-    xit "I can fill out a form to add a new application" do
+    it "I can fill out a form to add a new application" do
+      visit '/applications/new'
 
+      check "#{@pet_1.name}"
+      check "#{@pet_2.name}"
+
+      fill_in 'Name', with: 'Ali Vermeil'
+      fill_in 'Address', with: '100 Blake Street'
+      fill_in 'City', with: 'Denver'
+      fill_in 'State', with: 'CO'
+      fill_in 'Zip', with: '80211'
+      fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
+
+      click_button 'Submit Application'
+
+      expect(current_path).to eq('/favorites')
+
+      expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
+
+      expect(page).to_not have_content(@pet_1.name)
+      expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+
+      expect(page).to_not have_content(@pet_2.name)
+      expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
     end
   end
 end
