@@ -1,5 +1,12 @@
 <h1>All Favorite Pets</h1>
 
+<% if @pets.empty? %>
+  <h3>You haven't added any pets to your Favorite Pets yet.</h3>
+<% else %>
+  <%= button_to 'Remove All Pets from Favorites', "/favorites", method: :delete, class: 'button' %>
+<% end %>
+
+
 <section class="pet-grid">
   <% @pets.each do |pet| %>
   <section class="pet-info">

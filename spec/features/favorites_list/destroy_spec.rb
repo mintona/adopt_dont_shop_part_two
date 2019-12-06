@@ -90,6 +90,32 @@ RSpec.describe "As a visitor" do
         expect(page).to_not have_css("#pet-#{@pet_2.id}")
         expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
       end
+
+      it 'I can click a remove all button to clear my favorite pets' do
+        visit '/favorites'
+
+        expect(page).to_not have_content("You haven't added any pets to your Favorite Pets yet.")
+
+        expect(page).to have_content("Favorite Pets: 2")
+        expect(page).to have_content(@pet_1.name)
+        expect(page).to have_css("img[src*='#{@pet_1.image}']")
+
+        expect(page).to have_content(@pet_2.name)
+        expect(page).to have_css("img[src*='#{@pet_2.image}']")
+
+        click_button 'Remove All Pets from Favorites'
+
+        expect(current_path).to eq('/favorites')
+
+        expect(page).to_not have_content(@pet_1.name)
+        expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+
+        expect(page).to_not have_content(@pet_2.name)
+        expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
+
+        expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
+        expect(page).to have_content("Favorite Pets: 0")
+      end
     end
   end
 end

@@ -35,10 +35,27 @@ RSpec.describe "As a visitor" do
                           shelter: @shelter_2)
     end
 
+    it 'if I have no favorited pets it displays a message saying so' do
+      visit '/favorites'
+
+      expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
+
+      visit "/pets/#{@pet_1.id}"
+
+      click_button 'Add to Favorite Pets'
+
+      visit '/favorites'
+
+      expect(page).to_not have_content("You haven't added any pets to your Favorite Pets yet.")
+
+      click_button 'Remove from Favorite Pets'
+
+      expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
+    end
+
     it 'shows all favorited pets' do
       visit '/favorites'
 
-      # have message for no favorite pets yet
       expect(page).to_not have_content("#{@pet_1.name}")
       expect(page).to_not have_content("#{@pet_2.name}")
 
@@ -72,8 +89,3 @@ RSpec.describe "As a visitor" do
     end
   end
 end
-#   As a visitor
-# When I have added pets to my favorites list
-# And I visit my favorites index page ("/favorites")
-# I see all pets I've favorited
-# Each pet in my favorites shows the following information:
