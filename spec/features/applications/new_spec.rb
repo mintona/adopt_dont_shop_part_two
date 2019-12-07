@@ -98,7 +98,7 @@ RSpec.describe 'As a visitor' do
 
       expect(current_path).to eq('/favorites')
 
-      expect(page).to have_content("You have applied to adopt: #{@pet_1.name}, #{@pet_2.name}")
+      expect(page).to have_content("You have applied to adopt your selected pets.")
 
       expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
 
