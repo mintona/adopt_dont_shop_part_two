@@ -60,19 +60,32 @@ RSpec.describe 'As a visitor' do
   describe 'After I click the link to make a new application' do
     it "I see my favorites and I am able to select them" do
       visit '/applications/new'
-      # save_and_open_page
-        check "#{@pet_1.name}"
-        check "#{@pet_2.name}"
-        save_and_open_page
-      # check "#{@pet_1.name}", from: :favorited_pets
-      # check "#{@pet_2.name}", from: :favorited_pets
+
+        within "#pet-#{@pet_1.id}" do
+          expect(page).to have_unchecked_field('selected_pets_')
+          check 'selected_pets_'
+          expect(page).to have_checked_field('selected_pets_')
+        end
+
+        within "#pet-#{@pet_2.id}" do
+          expect(page).to have_unchecked_field('selected_pets_')
+          check 'selected_pets_'
+          expect(page).to have_checked_field('selected_pets_')
+        end
     end
 
     it "I can fill out a form to add a new application" do
       visit '/applications/new'
 
-      check "#{@pet_1.name}"
-      check "#{@pet_2.name}"
+      # maybe add a third pet to not check
+
+      within "#pet-#{@pet_1.id}" do
+        check 'selected_pets_'
+      end
+
+      within "#pet-#{@pet_2.id}" do
+        check 'selected_pets_'
+      end
 
       fill_in 'Name', with: 'Ali Vermeil'
       fill_in 'Address', with: '100 Blake Street'
@@ -84,6 +97,8 @@ RSpec.describe 'As a visitor' do
       click_button 'Submit Application'
 
       expect(current_path).to eq('/favorites')
+
+      expect(page).to have_content("You have applied to adopt: #{@pet_1.name}, #{@pet_2.name}")
 
       expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
 
