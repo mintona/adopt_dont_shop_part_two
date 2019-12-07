@@ -156,13 +156,11 @@ RSpec.describe 'As a visitor' do
         fill_in 'State', with: 'CO'
         fill_in 'Zip', with: '80211'
         fill_in 'Phone', with: '3309078495'
-        # fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
+        
         click_button 'Submit Application'
 
-        expect(current_path).to eq('/applications/new')
-
         expect(page).to have_button('Submit Application')
-        expect(page).to have_content("Please fill out all fields.")        
+        expect(page).to have_content("Please fill out all fields.")
       end
     end
   end
