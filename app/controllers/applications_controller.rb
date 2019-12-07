@@ -7,11 +7,25 @@ class ApplicationsController < ApplicationController
   end
 
   def create
+    application = Application.create!(application_params)
+
+    selected_pet_ids = params[:selected_pets]
+
+
+    @selected_pets = selected_pet_ids.map do |id|
+      Pet.find(id.to_i)
+    end
+
+    @selected_pets.each do |pet|
+      pet.applications << application
+    end
     require "pry"; binding.pry
-    selected_pets = params[:selected_pets]
-    application = Application.new(application_params)
-    #take this ! out at the end
-    application.save!
+
+    selected_pet_ids.each do |id|
+      favorites_list.remove(id)
+    end
+    
+    flash[:success] = "You have applied to adopt your selected pets."
 
     redirect_to '/favorites'
   end
