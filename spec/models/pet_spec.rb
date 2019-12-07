@@ -10,6 +10,12 @@ describe Pet, type: :model do
     it { should validate_presence_of :description}
   end
 
+  describe 'relationships' do
+    it {should belong_to :shelter}
+    it {should have_many :pet_applications}
+    it {should have_many(:applications).through(:pet_applications)}
+  end
+
   describe "model methods" do
     it "can count total pets" do
       expect(Pet.pet_count).to eq(0)
