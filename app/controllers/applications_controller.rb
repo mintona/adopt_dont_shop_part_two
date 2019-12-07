@@ -11,7 +11,6 @@ class ApplicationsController < ApplicationController
 
     selected_pet_ids = params[:selected_pets]
 
-
     @selected_pets = selected_pet_ids.map do |id|
       Pet.find(id.to_i)
     end
@@ -19,12 +18,11 @@ class ApplicationsController < ApplicationController
     @selected_pets.each do |pet|
       pet.applications << application
     end
-    require "pry"; binding.pry
 
     selected_pet_ids.each do |id|
       favorites_list.remove(id)
     end
-    
+
     flash[:success] = "You have applied to adopt your selected pets."
 
     redirect_to '/favorites'
@@ -32,10 +30,6 @@ class ApplicationsController < ApplicationController
 
   private
     def application_params
-      params.permit(:name, :address, :city, :state, :zip, :description)
+      params.permit(:name, :address, :city, :state, :zip, :phone, :description)
     end
-
-    # def selected_pets
-    #   params.permit(:selected_pets)
-    # end
 end
