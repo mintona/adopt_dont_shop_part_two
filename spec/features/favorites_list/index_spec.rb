@@ -87,5 +87,73 @@ RSpec.describe "As a visitor" do
         expect(current_path).to eq("/pets/#{@pet_2.id}")
       end
     end
+
+    describe "after one or more applications have been created" do
+      before(:each) do
+        pet_3_image = "https://images.pexels.com/photos/1076758/pexels-photo-1076758.jpeg"
+        pet_3_description = "I'm a jelly fish! Watch out, I sting!"
+        @pet_3 = Pet.create!(image: pet_3_image,
+                            name: "Peanut",
+                            approximate_age: "2",
+                            sex: "Female",
+                            shelter: @shelter_2,
+                            description: pet_3_description)
+
+        pets = [@pet_1, @pet_2]
+
+        pets.each do |pet|
+          visit "/pets/#{pet.id}"
+          click_button 'Add to Favorite Pets'
+        end
+
+        application = Application.create!(name: 'Jordan Holtkamp',
+                                          address: '123 Main St',
+                                          city: 'Lafayette',
+                                          state: 'CO',
+                                          zip: '80515',
+                                          phone: '6102021418',
+                                          description: 'I am a great pet dad.')
+
+        @pet_1.applications << application
+        @pet_2.applications << application
+      end
+
+      it "I see a section that lists all pets with at least one application" do
+        visit '/favorites'
+
+        within '#pets-with-applications' do
+          within "#pet-#{@pet_1.id}" do
+            expect(page).to have_content(@pet_1.name)
+            expect(page).to have_css("img[src*='#{@pet_1.image}']")
+          end
+
+          within "#pet-#{@pet_2.id}" do
+            expect(page).to have_content(@pet_2.name)
+            expect(page).to have_css("img[src*='#{@pet_2.image}']")
+          end
+
+          # within "#pet-#{@pet_3.id}"
+            expect(page).to_not have_content(@pet_3.name)
+            expect(page).to_not have_css("img[src*='#{@pet_3.image}']")
+          # end
+        end
+      end
+
+      xit "I can click a pet name to visit the pet show page" do
+        visit '/favorites'
+
+        within "#favorite-pets" do
+          click_link "#{@pet_1.name}"
+          expect(current_path).to eq("/pets/#{@pet_1.id}")
+        end
+
+        visit '/favorites'
+
+        within "#favorite-pets" do
+          click_link "#{@pet_2.name}"
+          expect(current_path).to eq("/pets/#{@pet_1.id}")
+        end
+      end
+    end
   end
 end
