@@ -17,4 +17,8 @@ class Pet < ApplicationRecord
   def self.sort_by_adoption_status
     order(:adoptable).reverse
   end
+
+  def self.has_applications
+require "pry"; binding.pry
+  end
 end
