@@ -1,0 +1,35 @@
+<h1>Apply for Adoption</h1>
+
+<%= form_tag "/applications" do %>
+
+  <%= label_tag :favorited_pets %><br>
+  <% @pets.each do |pet| %>
+  <section id="pet-<%= pet.id %>">
+    <%= pet.name %>
+    <%= check_box_tag 'selected_pets[]', pet.id %>
+  </section>
+  <% end %>
+
+  <%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+
+  <%= label_tag :address %>
+  <%= text_field_tag :address %><br>
+
+  <%= label_tag :city %>
+  <%= text_field_tag :city %><br>
+
+  <%= label_tag :state %>
+  <%= text_field_tag :state %><br>
+
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip %><br>
+
+  <%= label_tag :phone %>
+  <%= text_field_tag :phone %><br>
+
+  <%= label_tag :description %>
+  <%= text_field_tag :description %><br><br>
+
+  <%= submit_tag 'Submit Application', class: 'button' %>
+<% end %>

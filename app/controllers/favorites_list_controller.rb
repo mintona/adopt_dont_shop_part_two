@@ -19,10 +19,10 @@ class FavoritesListController < ApplicationController
 
   def destroy
     if params[:pet_id] == nil
-      favorites_list.contents.clear
-    else  
+      favorites_list.clear_all
+    else
       pet = Pet.find(params[:pet_id])
-      favorites_list.contents.delete(params[:pet_id])
+      favorites_list.remove(params[:pet_id])
       flash[:notice] = "#{pet.name} has been removed from your Favorite Pets."
     end
     redirect_back(fallback_location: '/favorites')
