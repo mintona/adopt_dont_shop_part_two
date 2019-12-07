@@ -74,39 +74,70 @@ RSpec.describe 'As a visitor' do
         end
     end
 
-    it "I can fill out a form to add a new application" do
-      visit '/applications/new'
+    describe "I can fill out a form to add a new application" do
+      it 'I can apply for all of my favorites' do
+        visit '/applications/new'
 
-      # maybe add a third pet to not check
+        within "#pet-#{@pet_1.id}" do
+          check 'selected_pets_'
+        end
 
-      within "#pet-#{@pet_1.id}" do
-        check 'selected_pets_'
+        within "#pet-#{@pet_2.id}" do
+          check 'selected_pets_'
+        end
+
+        fill_in 'Name', with: 'Ali Vermeil'
+        fill_in 'Address', with: '100 Blake Street'
+        fill_in 'City', with: 'Denver'
+        fill_in 'State', with: 'CO'
+        fill_in 'Zip', with: '80211'
+        fill_in 'Phone', with: '3309078495'
+        fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
+
+        click_button 'Submit Application'
+
+        expect(current_path).to eq('/favorites')
+
+        expect(page).to have_content("You have applied to adopt your selected pets.")
+
+        expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
+
+        expect(page).to_not have_content(@pet_1.name)
+        expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+
+        expect(page).to_not have_content(@pet_2.name)
+        expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
       end
 
-      within "#pet-#{@pet_2.id}" do
-        check 'selected_pets_'
+      it "I can apply for only some of my favorite pets" do
+        visit '/applications/new'
+
+        within "#pet-#{@pet_1.id}" do
+          check 'selected_pets_'
+        end
+
+        fill_in 'Name', with: 'Ali Vermeil'
+        fill_in 'Address', with: '100 Blake Street'
+        fill_in 'City', with: 'Denver'
+        fill_in 'State', with: 'CO'
+        fill_in 'Zip', with: '80211'
+        fill_in 'Phone', with: '3309078495'
+        fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
+
+        click_button 'Submit Application'
+
+        expect(current_path).to eq('/favorites')
+
+        expect(page).to have_content("You have applied to adopt your selected pets.")
+
+        expect(page).to_not have_content("You haven't added any pets to your Favorite Pets yet.")
+
+        expect(page).to_not have_content(@pet_1.name)
+        expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+
+        expect(page).to have_content(@pet_2.name)
+        expect(page).to have_css("img[src*='#{@pet_2.image}']")
       end
-
-      fill_in 'Name', with: 'Ali Vermeil'
-      fill_in 'Address', with: '100 Blake Street'
-      fill_in 'City', with: 'Denver'
-      fill_in 'State', with: 'CO'
-      fill_in 'Zip', with: '80211'
-      fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
-
-      click_button 'Submit Application'
-
-      expect(current_path).to eq('/favorites')
-
-      expect(page).to have_content("You have applied to adopt your selected pets.")
-
-      expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
-
-      expect(page).to_not have_content(@pet_1.name)
-      expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
-
-      expect(page).to_not have_content(@pet_2.name)
-      expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
     end
   end
 end
