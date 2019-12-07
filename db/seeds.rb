@@ -9,7 +9,7 @@
 # http://rmpuppyrescue.org/images/1052801_529279620453288_1859974512_o%20(1)172x119_2x.jpg - puppies
 # http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg - doctors
 # https://face4pets.org/wp-content/uploads/2015/06/shelter-cat3.jpg - cats
-
+Review.destroy_all
 Pet.destroy_all
 Shelter.destroy_all
 
@@ -74,3 +74,13 @@ pet_4 = Pet.create!(image: pet_4_image,
                     sex: "Male",
                     shelter: shelter_3,
                     description: pet_4_description)
+
+review_1 = shelter_1.reviews.create!(title: "Best Shelter Ever!",
+                                     content: "I had the best experience here. Would recommend!",
+                                     rating: 5,
+                                     image: "http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg")
+review_2 = shelter_1.reviews.create!(title: "Love this place!",
+                                     content: "They have the cutest pets you've ever seen and the best staff.",
+                                     rating: 4,
+                                     image: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat3.jpg")
+
