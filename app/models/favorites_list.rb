@@ -20,4 +20,12 @@ class FavoritesList
   def has_pet?(pet_id)
     @contents.keys.include?(pet_id.to_s)
   end
+
+  def clear_all
+    @contents.clear
+  end
+
+  def remove(pet_id)
+    @contents.delete(pet_id.to_s)
+  end
 end
