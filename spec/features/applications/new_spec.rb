@@ -166,6 +166,23 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_button('Submit Application')
         expect(page).to have_content("Please fill out all fields.")
       end
+
+      it "I will get an error message if I fill out all fields but fail to select any pets" do
+        visit '/applications/new'
+
+        fill_in 'Name', with: 'Ali Vermeil'
+        fill_in 'Address', with: '100 Blake Street'
+        fill_in 'City', with: 'Denver'
+        fill_in 'State', with: 'CO'
+        fill_in 'Zip', with: '80211'
+        fill_in 'Phone', with: '3309078495'
+        fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
+
+        click_button 'Submit Application'
+
+        expect(page).to have_button('Submit Application')
+        expect(page).to have_content("Please select at least one pet.")
+      end
     end
   end
 end
