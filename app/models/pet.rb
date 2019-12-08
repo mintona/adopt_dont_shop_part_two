@@ -19,6 +19,10 @@ class Pet < ApplicationRecord
   end
 
   def self.has_applications
-require "pry"; binding.pry
+    pet_ids = PetApplication.pluck(:pet_id).uniq
+
+    pet_ids.map do |id|
+      Pet.find(id)
+    end
   end
 end
