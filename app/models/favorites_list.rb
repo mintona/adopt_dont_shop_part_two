@@ -28,4 +28,8 @@ class FavoritesList
   def remove(pet_id)
     @contents.delete(pet_id.to_s)
   end
+
+  def pet_ids
+    @contents.keys.map { |key| key.to_i }
+  end
 end

@@ -8,7 +8,7 @@
 <% end %>
 
 
-<section class="pet-grid">
+<section class="pet-grid" id="favorites">
   <% @pets.each do |pet| %>
   <section class="pet-info">
   <section id=<%= "pet-#{pet.id}"%>>
@@ -19,3 +19,21 @@
   </section>
   <% end %>
 </section>
+
+<% if !@pets_with_applications.empty? %>
+<section id="pets-with-applications">
+  <h1>Pets With Applications</h1>
+  <ul>
+
+  <% @pets_with_applications.applied_for.each do |pet| %>
+  <section class="pet-info">
+    <!-- I'm not sure if we actually need this section id with the pet-app-pet.id -->
+  <section id=<%= "pet-app-#{pet.id}"%>>
+    <li>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li>
+
+  </section>
+  </section>
+  <% end  %>
+</ul>
+</section>
+<% end %>

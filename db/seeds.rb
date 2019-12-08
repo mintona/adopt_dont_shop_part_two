@@ -9,6 +9,8 @@
 # http://rmpuppyrescue.org/images/1052801_529279620453288_1859974512_o%20(1)172x119_2x.jpg - puppies
 # http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg - doctors
 # https://face4pets.org/wp-content/uploads/2015/06/shelter-cat3.jpg - cats
+PetApplication.destroy_all
+Application.destroy_all
 Review.destroy_all
 Pet.destroy_all
 Shelter.destroy_all
@@ -83,4 +85,3 @@ review_2 = shelter_1.reviews.create!(title: "Love this place!",
                                      content: "They have the cutest pets you've ever seen and the best staff.",
                                      rating: 4,
                                      image: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat3.jpg")
-
