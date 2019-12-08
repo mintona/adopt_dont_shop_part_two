@@ -1,9 +1,9 @@
 class FavoritesListController < ApplicationController
   def index
-    pet_ids = favorites_list.contents.keys
-    @pets = pet_ids.map do |id|
-      Pet.find(id.to_i)
-    end
+    pet_ids = favorites_list.pet_ids
+    @pets = Pet.where(id: pet_ids)
+
+    @pets_with_applications = Pet.applied_for
   end
 
   def update
