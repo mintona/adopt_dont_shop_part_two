@@ -63,7 +63,7 @@ describe Pet, type: :model do
       expect(sorted_pets.first).to eq(@pet_2)
     end
 
-    describe "#has_applications" do
+    describe "#applied_for" do
       it "can find pets with applications" do
         application = Application.create!(name: 'Jordan Holtkamp',
                                           address: '123 Main St',
@@ -85,7 +85,7 @@ describe Pet, type: :model do
         @pet_1.applications << application_2
         @pet_2.applications << application
 
-        expect(Pet.has_applications).to eq([@pet_1, @pet_2])
+        expect(Pet.applied_for).to eq([@pet_1, @pet_2])
       end
     end
   end
