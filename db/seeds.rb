@@ -15,6 +15,9 @@ Review.destroy_all
 Pet.destroy_all
 Shelter.destroy_all
 
+favorites_list = FavoritesList.new({})
+favorites_list.clear_all
+
 shelter_1 = Shelter.create(name: "Boulder Shelter",
                           address: "123 Arapahoe Ave",
                           city: "Boulder",
