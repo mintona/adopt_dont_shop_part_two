@@ -102,11 +102,13 @@ RSpec.describe 'As a visitor' do
 
         expect(page).to have_content("You haven't added any pets to your Favorite Pets yet.")
 
-        expect(page).to_not have_content(@pet_1.name)
-        expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+        within "#favorites" do
+          expect(page).to_not have_content(@pet_1.name)
+          expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
 
-        expect(page).to_not have_content(@pet_2.name)
-        expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
+          expect(page).to_not have_content(@pet_2.name)
+          expect(page).to_not have_css("img[src*='#{@pet_2.image}']")
+        end
       end
 
       it "I can apply for only some of my favorite pets" do
@@ -132,8 +134,10 @@ RSpec.describe 'As a visitor' do
 
         expect(page).to_not have_content("You haven't added any pets to your Favorite Pets yet.")
 
-        expect(page).to_not have_content(@pet_1.name)
-        expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+        within "#favorites" do
+          expect(page).to_not have_content(@pet_1.name)
+          expect(page).to_not have_css("img[src*='#{@pet_1.image}']")
+        end
 
         expect(page).to have_content(@pet_2.name)
         expect(page).to have_css("img[src*='#{@pet_2.image}']")
@@ -156,7 +160,7 @@ RSpec.describe 'As a visitor' do
         fill_in 'State', with: 'CO'
         fill_in 'Zip', with: '80211'
         fill_in 'Phone', with: '3309078495'
-        
+
         click_button 'Submit Application'
 
         expect(page).to have_button('Submit Application')
