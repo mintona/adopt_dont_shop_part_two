@@ -18,11 +18,8 @@ class Pet < ApplicationRecord
     order(:adoptable).reverse
   end
 
-  def self.has_applications
+  def self.applied_for
     pet_ids = PetApplication.pluck(:pet_id).uniq
-
-    pet_ids.map do |id|
-      Pet.find(id)
-    end
+    Pet.where(id: pet_ids)
   end
 end
