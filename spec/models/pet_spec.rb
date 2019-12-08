@@ -73,7 +73,16 @@ describe Pet, type: :model do
                                           phone: '6102021418',
                                           description: 'I am a great pet dad.')
 
+        application_2 = Application.create!(name: 'Ali Vermeil',
+                                          address: '123 Soutb St',
+                                          city: 'Boulder',
+                                          state: 'CO',
+                                          zip: '80301',
+                                          phone: '7158759903',
+                                          description: 'I have a great yard for dogs!')
+
         @pet_1.applications << application
+        @pet_1.applications << application_2
         @pet_2.applications << application
 
         expect(Pet.has_applications).to eq([@pet_1, @pet_2])
