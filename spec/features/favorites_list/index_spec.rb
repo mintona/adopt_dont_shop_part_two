@@ -91,7 +91,7 @@ RSpec.describe "As a visitor" do
 
     it "has no section for pets with applications before any applications have been created" do
       visit '/favorites'
-      
+
       expect(page).to_not have_content("Pets With Applications")
       expect(page).to_not have_css("#pets-with-applications")
     end
@@ -132,18 +132,13 @@ RSpec.describe "As a visitor" do
         within '#pets-with-applications' do
           within "#pet-app-#{@pet_1.id}" do
             expect(page).to have_content(@pet_1.name)
-            # expect(page).to have_css("img[src*='#{@pet_1.image}']")
           end
 
           within "#pet-app-#{@pet_2.id}" do
             expect(page).to have_content(@pet_2.name)
-            # expect(page).to have_css("img[src*='#{@pet_2.image}']")
           end
 
-          # within "#pet-#{@pet_3.id}"
-            expect(page).to_not have_content(@pet_3.name)
-            # expect(page).to_not have_css("img[src*='#{@pet_3.image}']")
-          # end
+          expect(page).to_not have_content(@pet_3.name)
         end
       end
 
