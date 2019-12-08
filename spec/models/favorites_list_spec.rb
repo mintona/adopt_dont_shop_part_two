@@ -86,7 +86,7 @@ RSpec.describe FavoritesList do
     it "can remove pet by id" do
       @favorites_list.add_pet(@pet_1.id)
       @favorites_list.add_pet(@pet_2.id)
-      
+
       expected = @favorites_list.contents.keys.include?(@pet_1.id.to_s && @pet_2.id.to_s)
 
       expect(expected).to eq(true)
@@ -96,6 +96,15 @@ RSpec.describe FavoritesList do
       keys = @favorites_list.contents.keys
 
       expect(keys).to eq([@pet_2.id.to_s])
+    end
+  end
+
+  describe '#pet_ids' do
+    it "can list pet ids of pets in favorites list" do
+      @favorites_list.add_pet(@pet_1.id)
+      @favorites_list.add_pet(@pet_2.id)
+
+      expect(@favorites_list.pet_ids).to eq([@pet_1.id, @pet_2.id])
     end
   end
 end
