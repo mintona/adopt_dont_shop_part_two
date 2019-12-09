@@ -17,9 +17,14 @@ class Pet < ApplicationRecord
   def self.sort_by_adoption_status
     order(:adoptable).reverse
   end
+  #
+  # def self.applied_for
+  #   pet_ids = PetApplication.pluck(:pet_id).uniq
+  #   Pet.where(id: pet_ids)
+  # end
+
 
   def self.applied_for
-    pet_ids = PetApplication.pluck(:pet_id).uniq
-    Pet.where(id: pet_ids)
+    Pet.distinct.joins(:pet_applications)
   end
 end
