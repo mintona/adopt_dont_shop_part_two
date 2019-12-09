@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
   def create
     application = Application.new(application_params)
 
-    if application.save && params[:selected_pets] == nil
+    if params[:selected_pets] == nil
       flash[:notice] = "Please select at least one pet."
       pet_ids = favorites_list.pet_ids
       @pets = Pet.where(id: pet_ids)
