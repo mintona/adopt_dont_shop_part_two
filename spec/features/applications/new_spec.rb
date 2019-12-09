@@ -168,6 +168,9 @@ RSpec.describe 'As a visitor' do
       end
 
       it "I will get an error message if I fill out all fields but fail to select any pets" do
+
+        expect(Application.all.count).to eq(0)
+
         visit '/applications/new'
 
         fill_in 'Name', with: 'Ali Vermeil'
@@ -182,6 +185,7 @@ RSpec.describe 'As a visitor' do
 
         expect(page).to have_button('Submit Application')
         expect(page).to have_content("Please select at least one pet.")
+        expect(Application.all.count).to eq(0)
       end
     end
   end
