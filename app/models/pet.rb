@@ -19,7 +19,6 @@ class Pet < ApplicationRecord
   end
 
   def self.applied_for
-    pet_ids = PetApplication.pluck(:pet_id).uniq
-    Pet.where(id: pet_ids)
+    Pet.distinct.joins(:pet_applications)
   end
 end
