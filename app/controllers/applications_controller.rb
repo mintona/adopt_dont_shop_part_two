@@ -18,11 +18,8 @@ class ApplicationsController < ApplicationController
       @selected_pets = Pet.where(id: selected_pet_ids)
 
       @selected_pets.each do |pet|
+        favorites_list.remove(pet.id)
         pet.applications << application
-      end
-      # next method can be refactored somehow I'm sure in favorites_list PORO
-      selected_pet_ids.each do |id|
-        favorites_list.remove(id)
       end
 
       flash[:success] = "You have applied to adopt your selected pets."
