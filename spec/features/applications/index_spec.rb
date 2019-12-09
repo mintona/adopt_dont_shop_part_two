@@ -34,7 +34,7 @@ RSpec.describe "As a visitor" do
       click_button 'Add to Favorite Pets'
     end
 
-    application = Application.create!(name: 'Jordan Holtkamp',
+    @application = Application.create!(name: 'Jordan Holtkamp',
                                       address: '123 Main St',
                                       city: 'Lafayette',
                                       state: 'CO',
@@ -42,16 +42,16 @@ RSpec.describe "As a visitor" do
                                       phone: '6102021418',
                                       description: 'I am a great pet dad.')
 
-    application_2 = Application.create!(name: 'Ali Vermeil',
+    @application_2 = Application.create!(name: 'Ali Vermeil',
                                       address: '100 Larimer St',
                                       city: 'Denver',
                                       state: 'CO',
                                       zip: '80211',
                                       phone: '3309078495',
                                       description: 'I am a great pet mom and my animal just got hit by a car.')
-    @pet_1.applications << application
-    @pet_2.applications << application
-    @pet_1.applications << application_2
+    @pet_1.applications << @application
+    @pet_2.applications << @application
+    @pet_1.applications << @application_2
   end
 
   describe "When I visit a pet show page" do
@@ -63,8 +63,30 @@ RSpec.describe "As a visitor" do
 
         expect(current_path).to eq("/pets/#{@pet_1.id}/applications")
 
-        expect(page).to have_link('Jordan Holtkamp')
-        expect(page).to have_link('Ali Vermeil')
+        expect(page).to have_link(@application.name)
+        expect(page).to have_link(@application_2.name)
+
+        visit "/pets/#{@pet_2.id}"
+
+        click_button "View all applications for #{@pet_2.name}"
+
+        expect(page).to have_link(@application.name)
+        expect(page).to_not have_link(@application_2.name)
+
+      end
+
+      it "I can click on any applicant's name to visit their application show page" do
+        visit "/pets/#{@pet_1.id}/applications"
+
+        click_link (@application.name)
+
+        expect(current_path).to eq("/applications/#{@application.id}")
+
+        visit "/pets/#{@pet_1.id}/applications"
+
+        click_link (@application_2.name)
+
+        expect(current_path).to eq("/applications/#{@application_2.id}")
       end
     end
   end
