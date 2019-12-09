@@ -89,5 +89,11 @@ RSpec.describe "As a visitor" do
         expect(page).to_not have_content("Adoption Status: Adoption Pending")
       end
     end
+
+    it 'has a link that takes me to all applicant names page' do
+      visit "/pets/#{@pet_1.id}"
+
+      expect(page).to have_link("View all people with an application for #{@pet_1.name}")
+    end
   end
 end
