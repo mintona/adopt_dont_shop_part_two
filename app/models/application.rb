@@ -10,4 +10,7 @@ class Application < ApplicationRecord
   validates_presence_of :phone
   validates_presence_of :description
 
+  def self.find_applications(pet_id)
+    Application.select('applications.*').joins(:pets).where("pets.id = #{pet_id}")
+  end
 end
