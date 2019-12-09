@@ -90,10 +90,10 @@ RSpec.describe "As a visitor" do
       end
     end
 
-    it 'has a link that takes me to all applicant names page' do
-      visit "/pets/#{@pet_1.id}"
-
-      expect(page).to have_link("View all people with an application for #{@pet_1.name}")
-    end
+    # it 'has a link that takes me to all applicant names page' do
+    #   visit "/pets/#{@pet_1.id}"
+    #
+    #   expect(page).to have_link("View all people with an application for #{@pet_1.name}")
+    # end
   end
 end
