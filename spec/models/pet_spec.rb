@@ -85,7 +85,12 @@ describe Pet, type: :model do
         @pet_1.applications << application_2
         @pet_2.applications << application
 
-        expect(Pet.applied_for).to eq([@pet_1, @pet_2])
+        pets_with_applications = Pet.applied_for.to_a
+
+        expect(pets_with_applications.length).to eq(2)
+        expect(pets_with_applications.include?(@pet_1)).to eq(true)
+        expect(pets_with_applications.include?(@pet_2)).to eq(true)
+        expect(pets_with_applications.include?(@pet_3)).to eq(false)
       end
     end
   end
