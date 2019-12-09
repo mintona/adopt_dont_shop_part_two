@@ -27,7 +27,16 @@ RSpec.describe 'As a visitor' do
                         description: pet_2_description,
                         shelter: @shelter_1)
 
-    pets = [@pet_1, @pet_2]
+    pet_3_image = "https://images.pexels.com/photos/1076758/pexels-photo-1076758.jpeg"
+    pet_3_description = "I'm a jelly fish! Watch out, I sting!"
+    @pet_3 = Pet.create!(image: pet_3_image,
+                        name: "Peanut",
+                        approximate_age: "2",
+                        sex: "Female",
+                        description: pet_3_description,
+                        shelter: @shelter_1)
+
+    pets = [@pet_1, @pet_2, @pet_3]
 
     pets.each do |pet|
       visit "/pets/#{pet.id}"
@@ -37,7 +46,6 @@ RSpec.describe 'As a visitor' do
 
   describe 'When I visit an applications show page' do
     it "shows all of the information for that application" do
-      visit '/applications/new'
 
       application = Application.create!(name: 'Jordan Holtkamp',
                                         address: '123 Main St',
@@ -49,21 +57,7 @@ RSpec.describe 'As a visitor' do
 
 
       @pet_1.applications << application
-      # within "#pet-#{@pet_1.id}" do
-      #   check 'selected_pets_'
-      # end
-      #
-      # fill_in 'Name', with: 'Ali Vermeil'
-      # fill_in 'Address', with: '100 Blake Street'
-      # fill_in 'City', with: 'Denver'
-      # fill_in 'State', with: 'CO'
-      # fill_in 'Zip', with: '80211'
-      # fill_in 'Phone', with: '3309078495'
-      # fill_in 'Description', with: 'We are a nice animal loving family and our cat just died.'
-      #
-      # click_button 'Submit Application'
-
-      # thinking the only way to visit the application show page dynamically would be to create an application, save it to the variable and then use the id of it
+      @pet_3.applications << application
 
       visit "/applications/#{application.id}"
 
@@ -77,6 +71,7 @@ RSpec.describe 'As a visitor' do
 
       within "#pets-applied-for" do
         expect(page).to have_link("#{@pet_1.name}")
+        expect(page).to have_link("#{@pet_3.name}")
         expect(page).to_not have_link("#{@pet_2.name}")
       end
     end

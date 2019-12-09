@@ -12,7 +12,9 @@
   <h3>Pets applied for with this application:</h3>
   <section id="pets-applied-for">
     <% @application.pets.each do |pet| %>
-      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <ul>
+        <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li>
+      </ul>
     <% end %>
   </section>
 </section>
