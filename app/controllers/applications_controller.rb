@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
   def create
     application = Application.new(application_params)
 
-    if application.save && params[:selected_pets] == nil
+    if params[:selected_pets] == nil
       flash[:notice] = "Please select at least one pet."
       pet_ids = favorites_list.pet_ids
       @pets = Pet.where(id: pet_ids)
@@ -18,11 +18,8 @@ class ApplicationsController < ApplicationController
       @selected_pets = Pet.where(id: selected_pet_ids)
 
       @selected_pets.each do |pet|
+        favorites_list.remove(pet.id)
         pet.applications << application
-      end
-      # next method can be refactored somehow I'm sure in favorites_list PORO
-      selected_pet_ids.each do |id|
-        favorites_list.remove(id)
       end
 
       flash[:success] = "You have applied to adopt your selected pets."

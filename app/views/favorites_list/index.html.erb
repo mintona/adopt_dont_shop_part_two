@@ -25,7 +25,7 @@
   <h1>Pets With Applications</h1>
   <ul>
 
-  <% @pets_with_applications.applied_for.each do |pet| %>
+  <% @pets_with_applications.each do |pet| %>
   <section class="pet-info">
     <!-- I'm not sure if we actually need this section id with the pet-app-pet.id -->
   <section id=<%= "pet-app-#{pet.id}"%>>
