@@ -27,6 +27,15 @@ RSpec.describe "As a visitor" do
                         description: pet_2_description,
                         shelter: @shelter_1)
 
+    pet_3_image = "https://images.pexels.com/photos/1076758/pexels-photo-1076758.jpeg"
+    pet_3_description = "I'm a jelly fish! Watch out, I sting!"
+    @pet_3 = Pet.create!(image: pet_3_image,
+                         name: "Peanut",
+                         approximate_age: "2",
+                         sex: "Female",
+                         description: pet_3_description,
+                         shelter: @shelter_1)
+
     pets = [@pet_1, @pet_2]
 
     pets.each do |pet|
@@ -87,6 +96,15 @@ RSpec.describe "As a visitor" do
         click_link (@application_2.name)
 
         expect(current_path).to eq("/applications/#{@application_2.id}")
+      end
+
+      describe "When I click a link to view all applications for a pet that has no applications" do
+        it "takes me to the pet application index and says there are no applications yet" do
+          visit "/pets/#{@pet_3.id}/applications"
+
+          message = "There are currently no applications for this pet."
+          expect(page).to have_content(message)
+        end
       end
     end
   end
