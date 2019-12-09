@@ -1,0 +1,18 @@
+<h2>Info for this Application</h2>
+
+<section id="application-<%= @application.id %>">
+  <p>Name: <%= @application.name %></p>
+  <p>Address: <%= @application.address %></p>
+  <p>City: <%= @application.city %></p>
+  <p>State: <%= @application.state %></p>
+  <p>Zip: <%= @application.zip %></p>
+  <p>Phone number: <%= @application.phone %></p>
+  <p>Description: <%= @application.description %></p><br><br>
+
+  <h3>Pets applied for with this application:</h3>
+  <section id="pets-applied-for">
+    <% @application.pets.each do |pet| %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    <% end %>
+  </section>
+</section>
