@@ -1,0 +1,8 @@
+<h1>Applicants for Pet</h1>
+<br>
+<ul>
+  <% @applications.each do |application| %>
+  <li>Applicant's Name: <%= link_to "#{application.name}", "/applications/#{application.id}" %></li>
+  <% end %>
+
+</ul>
