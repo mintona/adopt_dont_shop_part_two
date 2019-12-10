@@ -156,6 +156,37 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_link(@application.name)
         expect(page).to have_link(@application_2.name)
       end
+
+      it "I can click a button to unapprove the application for that pet and makes pet adoptable" do
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          click_button('Approve')
+        end
+
+        visit "/pets/#{@pet_1.id}"
+
+        expect(page).to_not have_content('Adoptable')
+        expect(page).to have_content("On hold for #{@application.name}")
+
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          expect(page).to_not have_button('Approve')
+          click_button('Unapprove')
+        end
+
+        expect(current_path).to eq("/applications/#{@application.id}")
+
+        within "#pet-app-#{@pet_1.id}" do
+          expect(page).to have_button('Approve')
+        end
+
+        visit "/pets/#{@pet_1.id}"
+
+        expect(page).to have_content('Adoptable')
+        expect(page).to_not have_content("On hold for #{@application.name}")
+      end
     end
   end
 end
