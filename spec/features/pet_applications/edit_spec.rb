@@ -99,33 +99,63 @@ RSpec.describe 'As a visitor' do
         within "#pet-app-#{@pet_3.id}" do
           click_button('Approve')
         end
-        
+
         expect(current_path).to eq("/pets/#{@pet_3.id}")
         expect(page).to have_content("Adoption Pending")
         expect(page).to have_content("On hold for #{@application.name}")
       end
     end
 
-    xit "there is no button to approve an application for a pet that already has an approved application" do
-      # visit "/pets/#{@pet_1.id}"
-      #
-      # expect(page).to_not have_content("Adoption Pending")
+    describe "if there is an approved application on the pet" do
+      before :each do
+        @application_2 = Application.create!(name: 'Ali Vermeil',
+          address: '123 South St',
+          city: 'Denver',
+          state: 'CO',
+          zip: '80211',
+          phone: '1234567890',
+          description: 'I am a great pet pop.')
 
-      visit "/applications/#{@application.id}"
-
-      within "#pet-app-#{@pet_1.id}" do
-        click_button('Approve')
+          @pet_1.applications << @application_2
       end
 
-      visit "/applications/#{@application.id}"
+      it "there is no button to approve another application for that pet" do
+        visit "/applications/#{@application.id}"
 
-      within "#pet-app-#{@pet_1.id}" do
-        expect(page).to_not have_button('Approve')
+        within "#pet-app-#{@pet_1.id}" do
+          click_button('Approve')
+        end
+
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          expect(page).to_not have_button('Approve')
+        end
+
+        visit "/applications/#{@application_2.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          expect(page).to_not have_button('Approve')
+        end
       end
 
-      expect(current_path).to eq("/pets/#{@pet_1.id}")
-      expect(page).to have_content("Adoption Pending")
-      expect(page).to have_content("On hold for #{@application.name}")
+      it "applications are still visible on the pets application index page" do
+        visit "/pets/#{@pet_1.id}/applications"
+
+        expect(page).to have_link(@application.name)
+        expect(page).to have_link(@application_2.name)
+
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          click_button('Approve')
+        end
+
+        visit "/pets/#{@pet_1.id}/applications"
+
+        expect(page).to have_link(@application.name)
+        expect(page).to have_link(@application_2.name)
+      end
     end
   end
 end
