@@ -1,0 +1,15 @@
+<%= form_tag path, method: method do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, shelter_name %><br>
+  <%= label_tag :address %>
+  <%= text_field_tag :address, shelter_address %><br>
+  <%= label_tag :city %>
+  <%= text_field_tag :city, shelter_city %><br>
+  <%= label_tag :state %>
+  <%= text_field_tag :state, shelter_state %><br>
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip, shelter_zip %>
+  <br>
+  <br>
+  <%= submit_tag button_text, class: "button" %>
+<% end %>
