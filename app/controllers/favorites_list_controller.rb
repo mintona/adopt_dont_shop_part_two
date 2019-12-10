@@ -27,5 +27,4 @@ class FavoritesListController < ApplicationController
     end
     redirect_back(fallback_location: '/favorites')
   end
-
 end
