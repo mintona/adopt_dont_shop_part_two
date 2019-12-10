@@ -9,13 +9,12 @@
   <p><b>Adoption Status:</b>
     <% if @pet.adoptable %>
       Adoptable
-      <%= button_to 'Change to Adoption Pending', "/pets/#{@pet.id}/adoptable", method: :patch, class: "button" %>
+
       <% else %>
       Adoption Pending <br>
       <% if @pet.approved_application? %>
         <p>On hold for <%= @pet.approved_applicant_name %> </p>
       <% end %>
-      <%= button_to 'Change to Adoptable', "/pets/#{@pet.id}/pending", method: :patch, class: "button" %>
     <% end %> </p>
 
 

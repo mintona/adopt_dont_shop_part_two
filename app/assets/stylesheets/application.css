@@ -14,22 +14,13 @@
  *= require_self
  */
 
- /* img {
-   width: 580px;
-   height: 386px;
-   border-radius: 8px;
- } */
-
  body {
   font-family: Arial, Helvetica, sans-sans-serif;
   padding: 20px;
   background-color: #EFEEEE;
-  /* color: #999999; */
 }
 
  img {
-   /* width: 580px;
-   height: 386px; */
    width:100%;
    max-width: 400px;
    height:100;
@@ -39,7 +30,6 @@
  }
 
 nav {
-  /* background-color: #999999; */
   background: #98AEB3;
   height:25px;
   text-align: right;
@@ -47,20 +37,12 @@ nav {
   border-radius: 4px;
 }
 
-nav > a:link {
-  color:white;
-}
-
-nav > a:visited {
-  color:white;
-}
-
-nav > a:hover {
-  color:hotpink;
-}
-
 nav > a {
   padding: 3px;
+}
+
+nav > p {
+  color: white;
 }
 
  a:link {
@@ -76,6 +58,10 @@ nav > a {
    color: hotpink;
  }
 
+ #nav-link {
+   color: white;
+ }
+
  .button {
    background-color: #999999;
    border-radius: 8px;
@@ -85,7 +71,6 @@ nav > a {
    display: inline-block;
    color: white;
    text-shadow: 3px 2px gray;
-   /* border-radius: 30%; */
  }
 
  a.shelter-name {
