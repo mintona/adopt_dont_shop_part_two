@@ -81,10 +81,51 @@ RSpec.describe 'As a visitor' do
         within "#pet-app-#{@pet_1.id}" do
           click_button('Approve')
         end
+
         expect(current_path).to eq("/pets/#{@pet_1.id}")
         expect(page).to have_content("Adoption Pending")
         expect(page).to have_content("On hold for #{@application.name}")
       end
+
+      it "I can still approve other pets on the same application" do
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          click_button('Approve')
+        end
+
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_3.id}" do
+          click_button('Approve')
+        end
+        
+        expect(current_path).to eq("/pets/#{@pet_3.id}")
+        expect(page).to have_content("Adoption Pending")
+        expect(page).to have_content("On hold for #{@application.name}")
+      end
+    end
+
+    xit "there is no button to approve an application for a pet that already has an approved application" do
+      # visit "/pets/#{@pet_1.id}"
+      #
+      # expect(page).to_not have_content("Adoption Pending")
+
+      visit "/applications/#{@application.id}"
+
+      within "#pet-app-#{@pet_1.id}" do
+        click_button('Approve')
+      end
+
+      visit "/applications/#{@application.id}"
+
+      within "#pet-app-#{@pet_1.id}" do
+        expect(page).to_not have_button('Approve')
+      end
+
+      expect(current_path).to eq("/pets/#{@pet_1.id}")
+      expect(page).to have_content("Adoption Pending")
+      expect(page).to have_content("On hold for #{@application.name}")
     end
   end
 end
