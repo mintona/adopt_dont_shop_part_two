@@ -41,15 +41,6 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
-  def update
-    @pet = Pet.find(params[:pet_id])
-    @application = Application.find(params[:application_id])
-
-    @pet.toggle!(:adoptable)
-    
-    redirect_to "/pets/#{@pet.id}"
-  end
-
   private
     def application_params
       params.permit(:name, :address, :city, :state, :zip, :phone, :description)
