@@ -1,0 +1,17 @@
+<%= form_tag path, method: method do %>
+
+  <%= label_tag :title %>
+  <%= text_field_tag :title, review_title %><br>
+
+  <%= label_tag :rating %>
+  <%= select_tag :rating, options_for_select([1, 2, 3, 4, 5], review_rating), prompt: "Select Rating" %><br>
+
+  <%= label_tag :content %>
+  <%= text_field_tag :content, review_content %><br>
+
+  <%= label_tag :image %>
+  <%= text_field_tag :image, review_image %><br>
+  <br>
+  <br>
+  <%= submit_tag button_text, class: "button" %>
+<% end %>

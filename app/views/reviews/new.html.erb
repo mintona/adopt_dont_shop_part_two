@@ -1,23 +1,11 @@
 <h1>Add a Review</h1>
 
-<%= form_tag "/shelters/#{@shelter_id}" do %>
-
-
-  <%= label_tag :title %>
-  <%= text_field_tag :title %><br>
-
-  <%= label_tag :rating %>
-  <%= select_tag :rating, options_for_select([1, 2, 3, 4, 5]), prompt: "Select Rating" %><br>
-
-  <%= label_tag :content %>
-  <%= text_field_tag :content %><br>
-
-  <%= label_tag :image %>
-  <%= text_field_tag :image %><br>
-
-  <br>
-  <br>
-  <%= submit_tag 'Submit Review', class: "button" %>
-
-
-<% end %>
+<%= render partial: 'form', locals: {
+    path: "/shelters/#{@shelter_id}",
+    method: :post,
+    button_text: 'Submit Review',
+    review_title: nil,
+    review_rating: nil,
+    review_content: nil,
+    review_image: nil
+} %>
