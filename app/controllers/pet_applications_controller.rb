@@ -7,6 +7,10 @@ class PetApplicationsController < ApplicationController
     pet.toggle_adoptable
     pet_application.toggle_approved
 
-    redirect_to "/pets/#{pet.id}"
+    if !pet.adoptable
+      redirect_to "/pets/#{params[:pet_id]}"
+    else
+      redirect_to "/applications/#{params[:application_id]}"
+    end 
   end
 end
