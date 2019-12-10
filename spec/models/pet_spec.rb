@@ -93,5 +93,48 @@ describe Pet, type: :model do
         expect(pets_with_applications.include?(@pet_3)).to eq(false)
       end
     end
+
+    describe "#applicant_name" do
+      it "can find the name of the approved applicant" do
+
+        application = Application.create!(name: 'Jordan Holtkamp',
+                                          address: '123 Main St',
+                                          city: 'Lafayette',
+                                          state: 'CO',
+                                          zip: '80515',
+                                          phone: '6102021418',
+                                          description: 'I am a great pet dad.')
+
+        @pet_1.applications << application
+
+        pet_application = PetApplication.where(pet_id: @pet_1.id).where(application_id: application.id).first
+
+        pet_application.toggle!(:approved)
+
+        expect(@pet_1.approved_applicant_name).to eq(application.name)
+      end
+    end
+
+    describe "#approved_application?" do
+      it "can find out if the pet has any approved applications" do
+        application = Application.create!(name: 'Jordan Holtkamp',
+                                          address: '123 Main St',
+                                          city: 'Lafayette',
+                                          state: 'CO',
+                                          zip: '80515',
+                                          phone: '6102021418',
+                                          description: 'I am a great pet dad.')
+
+        @pet_1.applications << application
+
+        pet_application = PetApplication.where(pet_id: @pet_1.id).where(application_id: application.id).first
+
+        expect(@pet_1.approved_application?).to eq(false)
+
+        pet_application.toggle!(:approved)
+
+        expect(@pet_1.approved_application?).to eq(true)
+      end
+    end
   end
 end
