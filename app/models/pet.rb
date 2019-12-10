@@ -30,4 +30,8 @@ class Pet < ApplicationRecord
     applications = Application.joins(:pet_applications).where("approved = true AND pet_id = #{self.id}")
     !applications.empty?
   end
+
+  def toggle_adoptable
+    toggle!(:adoptable)
+  end
 end

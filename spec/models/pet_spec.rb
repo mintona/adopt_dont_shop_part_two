@@ -136,5 +136,19 @@ describe Pet, type: :model do
         expect(@pet_1.approved_application?).to eq(true)
       end
     end
+
+    describe "#toggle_adoptable" do
+      it "can change a pets adoptable from true to false or false to true " do
+        expect(@pet_1.adoptable).to eq(true)
+
+        @pet_1.toggle_adoptable
+
+        expect(@pet_1.adoptable).to eq(false)
+
+        @pet_1.toggle_adoptable
+
+        expect(@pet_1.adoptable).to eq(true)
+      end
+    end
   end
 end
