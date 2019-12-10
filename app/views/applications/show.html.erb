@@ -16,7 +16,9 @@
   <% @application.pets.each do |pet| %>
     <section id=<%= "pet-app-#{pet.id}"%>>
       <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-        <%= button_to "Approve", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch, class: "button" %>
+        <% if !pet.approved_application? %>
+          <%= button_to "Approve", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch, class: "button" %>
+        <% end %>
       </li>
       </section>
   <% end %>
