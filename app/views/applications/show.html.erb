@@ -8,13 +8,17 @@
   <p>Zip: <%= @application.zip %></p>
   <p>Phone number: <%= @application.phone %></p>
   <p>Description: <%= @application.description %></p><br><br>
+</section>
 
-  <h3>Pets applied for with this application:</h3>
-  <section id="pets-applied-for">
-    <% @application.pets.each do |pet| %>
-      <ul>
-        <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li>
-      </ul>
-    <% end %>
-  </section>
+<h3>Pets On Application:</h3>
+<section id="pets-applied-for">
+  <ul>
+  <% @application.pets.each do |pet| %>
+    <section id=<%= "pet-app-#{pet.id}"%>>
+      <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+        <%= button_to "Approve", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch, class: "button" %>
+      </li>
+      </section>
+  <% end %>
+</ul>
 </section>

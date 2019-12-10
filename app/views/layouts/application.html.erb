@@ -11,9 +11,9 @@
   <body>
     <nav>
       <p>
-      <%= link_to 'All Pets', '/pets' %>
-      <%= link_to 'All Shelters', '/shelters' %>
-      <%= link_to 'Favorite Pets:', '/favorites' %> <%= favorites_list.total_count %>
+      <%= link_to 'All Pets', '/pets', id: "nav-link" %>
+      <%= link_to 'All Shelters', '/shelters', id: "nav-link" %>
+      <%= link_to 'Favorite Pets:', '/favorites', id: "nav-link" %> <%= favorites_list.total_count %>
       </p>
     </nav>
 

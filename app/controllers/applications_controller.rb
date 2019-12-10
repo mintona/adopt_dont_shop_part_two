@@ -1,4 +1,8 @@
 class ApplicationsController < ApplicationController
+  def index
+    @applications = Application.find_applications(params[:pet_id])
+  end
+
   def new
     pet_ids = favorites_list.pet_ids
     @pets = Pet.where(id: pet_ids)
@@ -35,10 +39,6 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-  end
-
-  def index
-    @applications = Application.find_applications(params[:pet_id])
   end
 
   private
