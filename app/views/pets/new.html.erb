@@ -1,15 +1,14 @@
 <h1>Add a Pet</h1>
 
 <%= render partial: 'form', locals: {
-                                      path: "/shelters/#{@shelter_id}/pets",
-                                      method: :post,
-                                      button_text: 'Add Pet',
-                                      pet_name: nil,
-                                      pet_description: nil,
-                                      pet_age: nil,
-                                      pet_sex: nil,
-                                      pet_image: nil,
-
+    path: "/shelters/#{@shelter_id}/pets",
+    method: :post,
+    button_text: 'Add Pet',
+    pet_name: nil,
+    pet_description: nil,
+    pet_age: nil,
+    pet_sex: nil,
+    pet_image: nil
 } %>
 
 

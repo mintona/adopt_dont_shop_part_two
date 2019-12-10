@@ -1,13 +1,12 @@
 <h1>Update <%= @pet.name %>'s Information</h1>
 
 <%= render partial: 'form', locals: {
-                                      path: "/pets/#{@pet.id}",
-                                      method: :patch,
-                                      button_text: 'Update Pet',
-                                      pet_name: @pet.name,
-                                      pet_description: @pet.description,
-                                      pet_age: @pet.approximate_age,
-                                      pet_sex: @pet.sex,
-                                      pet_image: @pet.image,
-
+    path: "/pets/#{@pet.id}",
+    method: :patch,
+    button_text: 'Update Pet',
+    pet_name: @pet.name,
+    pet_description: @pet.description,
+    pet_age: @pet.approximate_age,
+    pet_sex: @pet.sex,
+    pet_image: @pet.image,
 } %>
