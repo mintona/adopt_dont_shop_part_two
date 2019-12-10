@@ -82,7 +82,6 @@ RSpec.describe 'As a visitor' do
         within "#pet-app-#{@pet_1.id}" do
           click_button('Approve')
         end
-
         expect(current_path).to eq("/pets/#{@pet_1.id}")
         expect(page).to have_content("Adoption Pending")
         expect(page).to have_button("Change to Adoptable")
