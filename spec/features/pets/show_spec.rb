@@ -59,35 +59,5 @@ RSpec.describe "As a visitor" do
 
       expect(page).to have_content("Adoption Status: Adoption Pending")
     end
-
-    describe "I can click a link to change the pets adoptable status" do
-      it "if pet is adoptable" do
-        visit "/pets/#{@pet_1.id}"
-
-        expect(page).to have_content("Adoptable")
-
-        click_on "Change to Adoption Pending"
-
-        expect(current_path).to eq("/pets/#{@pet_1.id}")
-
-        expect(page).to have_content("Adoption Status: Adoption Pending")
-        expect(page).to_not have_content("Adoption Status: Adoptable")
-      end
-
-      it "if pet is not adoptable" do
-        @pet_1.update(adoptable: false)
-
-        visit "/pets/#{@pet_1.id}"
-
-        expect(page).to have_content("Adoption Pending")
-
-        click_on "Change to Adoptable"
-
-        expect(current_path).to eq("/pets/#{@pet_1.id}")
-
-        expect(page).to have_content("Adoption Status: Adoptable")
-        expect(page).to_not have_content("Adoption Status: Adoption Pending")
-      end
-    end
   end
 end
