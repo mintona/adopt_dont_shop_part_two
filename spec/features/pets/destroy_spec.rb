@@ -21,7 +21,7 @@ RSpec.describe "As a visitor", type: :feature do
                                       description: description)
     end
 
-    it "I click the delete pet link to remove pet from the pets index" do
+    it "by clicking the delete pet link to remove pet from the pets index" do
       visit '/pets'
 
       expect(page).to have_content(@pet_1.name)
@@ -41,8 +41,19 @@ RSpec.describe "As a visitor", type: :feature do
       expect(page).to_not have_content(@pet_1.sex)
     end
 
-    it "if it does not have an approved application" do
+    it "and if it was favorited it is removed from the favorites list" do
+      visit "/pets/#{@pet_1.id}"
 
+      click_button 'Add to Favorite Pets'
+
+      expect(page).to have_content('Favorite Pets: 1')
+
+      click_button 'Delete Pet'
+
+      expect(page).to have_content('Favorite Pets: 0')
+    end
+
+    it "if it does not have an approved application" do
       application_1 = Application.create!(name: 'Jordan Holtkamp',
                                         address: '123 Main St',
                                         city: 'Lafayette',
