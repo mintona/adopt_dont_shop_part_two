@@ -14,8 +14,9 @@ class SheltersController < ApplicationController
     shelter = Shelter.new(shelter_params)
     if shelter.save
       redirect_to '/shelters'
+      flash[:success] = "The shelter has been added!"
     else
-      flash[:error] = shelter.errors.full_messages.to_sentence
+      flash.now[:notice] = shelter.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -29,9 +30,11 @@ class SheltersController < ApplicationController
     shelter.update(shelter_params)
     if shelter.save
       redirect_to "/shelters/#{shelter.id}"
+      flash[:success] = "The shelter has been updated!"
     else
-      flash[:error] = shelter.errors.full_messages.to_sentence
-      redirect_back(fallback_location: '/shelters')
+      flash.now[:notice] = shelter.errors.full_messages.to_sentence
+      @shelter = Shelter.find(params[:id])
+      render :edit
     end
   end
 
