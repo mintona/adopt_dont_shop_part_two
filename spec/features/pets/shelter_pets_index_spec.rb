@@ -52,7 +52,7 @@ RSpec.describe "As a visitor", type: :feature do
     end
 
     it "there is a link to add a new adoptable pet for the shelter" do
-      click_link "Add Pet"
+      click_button "Add Pet"
 
       expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets/new")
     end
