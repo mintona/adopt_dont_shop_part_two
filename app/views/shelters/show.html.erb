@@ -4,9 +4,12 @@
 <%= @shelter.state %> <%= @shelter.zip %>
 <br>
 <br>
-<%= link_to 'View Pets', "/shelters/#{@shelter.id}/pets" %>
 <br>
-<%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %>
+<p>Number of pets at this shelter: <%= @shelter.pet_count %> </p>
+<p>Number of applications on file for pets at this shelter: <%= @shelter.number_of_applications %></p>
+<br>
+<%= link_to 'View Pets', "/shelters/#{@shelter.id}/pets" %><br><br>
+<%= link_to 'Update Shelter', "/shelters/#{@shelter.id}/edit" %><br>
 <br>
 <% if !@shelter.pets_pending? %>
   <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %>
@@ -14,6 +17,7 @@
 
 <section class = "review-grid">
 <h2>Reviews</h2>
+<p>Average Rating: <%= @shelter.average_rating.round(2) %> / 5</p>
 <%= button_to 'Add Review', "/shelters/#{@shelter.id}/reviews/new", method: :get, class: "button" %>
 <% @shelter.reviews.each do |review| %>
   <section id = "review-<%=review.id%>">
