@@ -187,10 +187,11 @@ RSpec.describe "As a visitor" do
           expect(current_path).to eq("/pets/#{@pet_1.id}")
 
           visit '/favorites'
-save_and_open_page
+
           within "#approved-pets" do
             click_link "#{@pet_2.name}"
           end
+
           expect(current_path).to eq("/pets/#{@pet_2.id}")
         end
       end
