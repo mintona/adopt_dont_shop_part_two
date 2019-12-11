@@ -24,4 +24,20 @@ RSpec.describe "As a visitor", type: :feature do
 
     expect(page).to have_content('Lafayette Shelter')
   end
+
+  describe "If I do not fill in a field" do
+    it "gives me a flash message letting me know which field I missed" do
+      visit "/shelters/new"
+
+      fill_in 'Name', with: 'Lafayette Shelter'
+      fill_in 'Address', with: '789 South Public Rd'
+      fill_in 'City', with: 'Lafayette'
+      fill_in 'State', with: 'CO'
+
+      click_button 'Add Shelter'
+
+      expect(page).to have_button("Add Shelter")
+      expect(page).to have_content("Zip can't be blank")
+    end
+  end
 end
