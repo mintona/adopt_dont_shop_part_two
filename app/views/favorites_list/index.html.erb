@@ -33,3 +33,16 @@
       </ul>
   </section>
 <% end %>
+
+<% if @pets.approved_applications? %>
+  <section id="approved-pets">
+    <h2>Pets with Approved Applications</h2>
+    <ul>
+      <% @pets_with_applications.each do |pet| %>
+        <% if pet.approved_application? %>
+          <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
