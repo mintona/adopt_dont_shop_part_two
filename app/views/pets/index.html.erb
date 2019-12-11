@@ -1,45 +1,37 @@
-<% if @shelter && @pets.empty? %>
+<% if @shelter %>
   <h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> Pets </h1>
   <p> Number of Pets: <%= @shelter.pets.pet_count %> </p>
-  <%= link_to 'Add Pet', "/shelters/#{@shelter.id}/pets/new" %>
-
-<% elsif @shelter %>
-  <h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> Pets </h1>
-  <p> Number of Pets: <%= @shelter.pets.pet_count %> </p>
-    <% @shelter_id = @pets.first.shelter_id %>
+  <%= button_to 'Add Pet', "/shelters/#{@shelter.id}/pets/new", method: :get, class: "button" %>
     <section class="pet-grid">
-
-    <% @pets.sort_by_adoption_status.each do |pet| %>
-      <section class="pet-info">
-      <section id=<%= "#{pet.id}"%>>
-      <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
-      <%= image_tag(pet.image, :alt => "#{pet.name} image") %>
-      <p>Approximate Age: <%= pet.approximate_age %> </p>
-      <p>Sex: <%= pet.sex %> </p>
-      <%= button_to 'Edit Pet', "/pets/#{pet.id}/edit", method: :get, class: "button" %>
-      <%= button_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "button" %>
-      </section>
-      </section>
-    <% end %>
+      <% @pets.sort_by_adoption_status.each do |pet| %>
+        <section class="pet-info">
+          <section id=<%= "#{pet.id}"%>>
+            <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
+            <%= image_tag(pet.image, :alt => "#{pet.name} image") %>
+            <p>Approximate Age: <%= pet.approximate_age %> </p>
+            <p>Sex: <%= pet.sex %> </p>
+            <%= button_to 'Edit Pet', "/pets/#{pet.id}/edit", method: :get, class: "button" %>
+            <%= button_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "button" %>
+          </section>
+        </section>
+      <% end %>
     </section>
-  <%= link_to 'Add Pet', "/shelters/#{@shelter_id}/pets/new" %>
 
-  <% elsif  %>
+  <% else  %>
     <h1>All Pets</h1>
     <section class="pet-grid">
       <% @pets.sort_by_adoption_status.each do |pet| %>
-      <section class="pet-info">
-      <section id=<%= "#{pet.id}"%>>
-        <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
-        <%= image_tag(pet.image, :alt => "#{pet.name} image") %>
-        <p>Approximate Age: <%= pet.approximate_age %> </p>
-        <p>Sex: <%= pet.sex %> </p>
-        <p>Current Shelter: <%= link_to "#{pet.shelter.name}", "/shelters/#{pet.shelter.id}" %> </p>
-        <%= button_to 'Edit Pet', "/pets/#{pet.id}/edit", method: :get, class: "button" %>
-        <%= button_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "button" %>
-
-      </section>
-      </section>
+        <section class="pet-info">
+          <section id=<%= "#{pet.id}"%>>
+            <h2>Name: <%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h2>
+            <%= image_tag(pet.image, :alt => "#{pet.name} image") %>
+            <p>Approximate Age: <%= pet.approximate_age %> </p>
+            <p>Sex: <%= pet.sex %> </p>
+            <p>Current Shelter: <%= link_to "#{pet.shelter.name}", "/shelters/#{pet.shelter.id}" %> </p>
+            <%= button_to 'Edit Pet', "/pets/#{pet.id}/edit", method: :get, class: "button" %>
+            <%= button_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "button" %>
+          </section>
+        </section>
       <% end %>
-      </section>
+    </section>
 <% end %>
