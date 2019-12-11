@@ -84,7 +84,10 @@ RSpec.describe 'As a visitor' do
 
         expect(current_path).to eq("/pets/#{@pet_1.id}")
         expect(page).to have_content("Adoption Pending")
-        expect(page).to have_content("On hold for #{@application.name}")
+        expect(page).to have_content("On hold for: #{@application.name}")
+
+        click_link "#{@application.name}"
+        expect(current_path).to eq("/applications/#{@application.id}")
       end
 
       it "I can still approve other pets on the same application" do
@@ -102,7 +105,7 @@ RSpec.describe 'As a visitor' do
 
         expect(current_path).to eq("/pets/#{@pet_3.id}")
         expect(page).to have_content("Adoption Pending")
-        expect(page).to have_content("On hold for #{@application.name}")
+        expect(page).to have_content("On hold for: #{@application.name}")
       end
     end
 
@@ -167,7 +170,7 @@ RSpec.describe 'As a visitor' do
         visit "/pets/#{@pet_1.id}"
 
         expect(page).to_not have_content('Adoptable')
-        expect(page).to have_content("On hold for #{@application.name}")
+        expect(page).to have_content("On hold for: #{@application.name}")
 
         visit "/applications/#{@application.id}"
 
@@ -185,7 +188,7 @@ RSpec.describe 'As a visitor' do
         visit "/pets/#{@pet_1.id}"
 
         expect(page).to have_content('Adoptable')
-        expect(page).to_not have_content("On hold for #{@application.name}")
+        expect(page).to_not have_content("On hold for: #{@application.name}")
       end
 
       it "I only have an unapprove button on the application show page of the approved application" do
