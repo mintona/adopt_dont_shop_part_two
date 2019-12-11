@@ -23,6 +23,7 @@ RSpec.describe FavoritesList do
                                       description: "I'm a peacock!",
                                       image: pet_2_image)
   end
+  
   describe "#total_count" do
     it "can calculate the total number of favorited pets" do
       favorites_list = FavoritesList.new({

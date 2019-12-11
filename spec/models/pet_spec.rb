@@ -46,22 +46,26 @@ describe Pet, type: :model do
                                     image: pet_3_image)
     end
 
-    it "can count total pets" do
-      expect(Pet.pet_count).to eq(3)
+    describe "#pet_count" do
+      it "can count total pets" do
+        expect(Pet.pet_count).to eq(3)
+      end
     end
 
-    it "can sort pets by adoption status" do
-      pets = @shelter_1.pets
-      all_adoptable = pets.all? { |pet| pet.adoptable }
-      expect(all_adoptable).to eq true
-      expect(pets.first).to eq(@pet_1)
+    describe "#sort_by_adoption_status" do
+      it "can sort pets by adoption status" do
+        pets = @shelter_1.pets
+        all_adoptable = pets.all? { |pet| pet.adoptable }
+        expect(all_adoptable).to eq true
+        expect(pets.first).to eq(@pet_1)
 
-      @pet_1.update(adoptable: false)
-      @pet_3.update(adoptable: false)
+        @pet_1.update(adoptable: false)
+        @pet_3.update(adoptable: false)
 
-      sorted_pets = @shelter_1.pets.sort_by_adoption_status
-      expect(sorted_pets.first).to eq(@pet_2)
-    end
+        sorted_pets = @shelter_1.pets.sort_by_adoption_status
+        expect(sorted_pets.first).to eq(@pet_2)
+      end
+    end 
 
     describe "#applied_for" do
       it "can find pets with applications" do
