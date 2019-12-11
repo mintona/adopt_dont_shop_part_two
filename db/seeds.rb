@@ -88,3 +88,11 @@ review_2 = shelter_1.reviews.create!(title: "Love this place!",
                                      content: "They have the cutest pets you've ever seen and the best staff.",
                                      rating: 4,
                                      image: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat3.jpg")
+review_3 = shelter_2.reviews.create!(title: "Rude Staff!",
+                                     content: "Don't go here!",
+                                     rating: 1,
+                                     image: "https://www.emojirequest.com/images/ThumbsDownEmoji.jpg")
+review_4 = shelter_2.reviews.create!(title: "Excellent Staff!",
+                                     content: "Not sure why the other reviewers hate this place. We love it. Staff is great.",
+                                     rating: 5,
+                                     image: "https://www.sspca.org/sites/main/files/imagecache/medium/main-images/fullsizeoutput_35d.jpeg?1557738576")
