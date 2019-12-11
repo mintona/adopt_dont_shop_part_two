@@ -46,16 +46,6 @@ class PetsController < ApplicationController
     end
   end
 
-  def update_adoptable
-    pet = Pet.find(params[:id])
-    if pet.adoptable
-      pet.update(adoptable: false)
-    else
-      pet.update(adoptable: true)
-    end
-    redirect_to "/pets/#{pet.id}"
-  end
-
   private
     def pet_params
       params.permit(:image, :name, :description, :approximate_age, :sex)
