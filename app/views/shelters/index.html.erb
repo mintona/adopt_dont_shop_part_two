@@ -2,13 +2,13 @@
 
 <% @shelters.each do |shelter| %>
   <section id=<%= "#{shelter.id}"%>>
-  <%= link_to "#{shelter.name}", "/shelters/#{shelter.id}", class: "shelter-name" %>
-  <%= button_to 'Edit Shelter', "/shelters/#{shelter.id}/edit", method: :get, class: "button" %>
-  <% if !shelter.pets_pending? %>
-    <%= button_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "button" %>
-  <% end %>
+    <%= link_to "#{shelter.name}", "/shelters/#{shelter.id}", class: "shelter-name" %>
+    <%= button_to 'Edit Shelter', "/shelters/#{shelter.id}/edit", method: :get, class: "button" %>
+      <% if !shelter.pets_pending? %>
+        <%= button_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "button" %>
+      <% end %>
   </section>
-  <br>
+<br>
 <% end %>
 <br>
 
