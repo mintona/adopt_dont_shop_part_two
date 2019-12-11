@@ -1,12 +1,11 @@
 <% if @shelter && @pets.empty? %>
-  <p> Number of Pets: <%= @shelter.pets.pet_count %> </p>
-
   <h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> Pets </h1>
+  <p> Number of Pets: <%= @shelter.pets.pet_count %> </p>
   <%= link_to 'Add Pet', "/shelters/#{@shelter.id}/pets/new" %>
 
 <% elsif @shelter %>
-  <p> Number of Pets: <%= @shelter.pets.pet_count %> </p>
   <h1> <%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> Pets </h1>
+  <p> Number of Pets: <%= @shelter.pets.pet_count %> </p>
     <% @shelter_id = @pets.first.shelter_id %>
     <section class="pet-grid">
 
