@@ -19,7 +19,6 @@ RSpec.describe "As a visitor" do
       visit "/shelters/#{@shelter_1.id}"
 
       expect(page).to_not have_content(title)
-      expect(page).to_not have_content(rating)
       expect(page).to_not have_content(content)
       expect(page).to_not have_content(image)
 
@@ -87,7 +86,7 @@ RSpec.describe "As a visitor" do
       fill_in 'Title', with: title
       select rating, from: :rating
       fill_in 'Content', with: content
-      
+
       click_button 'Submit Review'
 
       expect(current_path).to eq("/shelters/#{@shelter_1.id}")
