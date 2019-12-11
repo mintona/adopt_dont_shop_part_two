@@ -187,6 +187,21 @@ RSpec.describe 'As a visitor' do
         expect(page).to have_content('Adoptable')
         expect(page).to_not have_content("On hold for #{@application.name}")
       end
+
+      it "I only have an unapprove button on the application show page of the approved application" do
+        visit "/applications/#{@application.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          click_button('Approve')
+        end
+
+        visit "/applications/#{@application_2.id}"
+
+        within "#pet-app-#{@pet_1.id}" do
+          expect(page).to_not have_button('Approve')
+          expect(page).to_not have_button('Unapprove')
+        end
+      end
     end
   end
 end
