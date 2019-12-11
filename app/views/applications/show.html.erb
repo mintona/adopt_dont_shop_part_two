@@ -18,7 +18,7 @@
       <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
         <% if !pet.approved_application? %>
           <%= button_to "Approve", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch, class: "button" %>
-        <% else %>
+        <% elsif @application.id == pet.approved_application_id %>
           <%= button_to "Unapprove", "/pets/#{pet.id}/applications/#{@application.id}", method: :patch, class: "button" %>
         <% end %>
       </li>
