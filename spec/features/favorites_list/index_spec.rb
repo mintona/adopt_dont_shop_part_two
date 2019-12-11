@@ -114,7 +114,7 @@ RSpec.describe "As a visitor" do
           click_button 'Add to Favorite Pets'
         end
 
-        application = Application.create!(name: 'Jordan Holtkamp',
+        @application = Application.create!(name: 'Jordan Holtkamp',
                                           address: '123 Main St',
                                           city: 'Lafayette',
                                           state: 'CO',
@@ -122,8 +122,8 @@ RSpec.describe "As a visitor" do
                                           phone: '6102021418',
                                           description: 'I am a great pet dad.')
 
-        @pet_1.applications << application
-        @pet_2.applications << application
+        @pet_1.applications << @application
+        @pet_2.applications << @application
       end
 
       it "I see a section that lists all pets with at least one application" do
@@ -154,6 +154,44 @@ RSpec.describe "As a visitor" do
 
         within "#pets-with-applications" do
           click_link "#{@pet_2.name}"
+          expect(current_path).to eq("/pets/#{@pet_2.id}")
+        end
+      end
+
+      describe "When I have approved an application" do
+        it "lists all pets that have an approved application on them" do
+          visit '/favorites'
+
+          expect(page).to_not have_content("Pets with Approved Applications")
+          expect(page).to_not have_css("#approved-pets")
+
+          visit "/applications/#{@application.id}"
+
+          within "#pet-app-#{@pet_1.id}" do
+            click_button 'Approve'
+          end
+
+          visit "/applications/#{@application.id}"
+
+          within "#pet-app-#{@pet_2.id}" do
+            click_button 'Approve'
+          end
+
+          visit '/favorites'
+
+          within "#approved-pets" do
+            expect(page).to_not have_link("#{@pet_3.name}")
+            click_link "#{@pet_1.name}"
+          end
+
+          expect(current_path).to eq("/pets/#{@pet_1.id}")
+
+          visit '/favorites'
+
+          within "#approved-pets" do
+            click_link "#{@pet_2.name}"
+          end
+
           expect(current_path).to eq("/pets/#{@pet_2.id}")
         end
       end

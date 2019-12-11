@@ -22,6 +22,11 @@ class Pet < ApplicationRecord
     Pet.distinct.joins(:pet_applications)
   end
 
+  def self.approved_applications?
+    applications = Application.joins(:pet_applications).where("approved = true")
+    !applications.empty?
+  end
+
   def approved_applicant_name
     Application.joins(:pet_applications).where("approved = true AND pet_id = #{self.id}").first.name
   end
