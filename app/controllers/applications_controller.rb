@@ -21,10 +21,7 @@ class ApplicationsController < ApplicationController
       selected_pet_ids = params[:selected_pets]
       @selected_pets = Pet.where(id: selected_pet_ids)
 
-      @selected_pets.each do |pet|
-        favorites_list.remove(pet.id)
-        pet.applications << application
-      end
+      remove_from_favorites(@selected_pets)
 
       flash[:success] = "You have applied to adopt your selected pets."
       redirect_to '/favorites'
@@ -44,5 +41,14 @@ class ApplicationsController < ApplicationController
   private
     def application_params
       params.permit(:name, :address, :city, :state, :zip, :phone, :description)
+    end
+
+    def remove_from_favorites(pets)
+      application = Application.new(application_params)
+
+      pets.each do |pet|
+        favorites_list.remove(pet.id)
+        pet.applications << application
+      end
     end
 end
