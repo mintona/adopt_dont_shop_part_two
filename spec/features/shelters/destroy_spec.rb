@@ -51,7 +51,7 @@ RSpec.describe "As a visitor", type: :feature do
   end
 
   describe "If a shelter has pets that are pending adoption" do
-    it "I cannot see a button to delete that shelter on its show page" do
+    it "I cannot see a button to delete that shelter on its show page until I unapprove that pet" do
       pet_1_image = "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg"
       pet_1_description = "I am a loveable, snuggly, cat! If you are anti snuggle, look elsewhere. I want to be pet at all times!"
       pet_1 = Pet.create!(image: pet_1_image,
@@ -85,7 +85,21 @@ RSpec.describe "As a visitor", type: :feature do
 
       visit "/shelters"
 
-      expect(page).to_not have_button('Delete Shelter')
+      within "##{@shelter_1.id}" do
+        expect(page).to_not have_button('Delete Shelter')
+      end
+
+      visit "/applications/#{application.id}"
+
+      within "#pet-app-#{pet_1.id}" do
+        click_button('Unapprove')
+      end
+
+      visit "/shelters/#{@shelter_1.id}"
+
+      click_link('Delete Shelter')
+
+      expect(page).to_not have_content(@shelter_1.name)
     end
   end
 
@@ -96,7 +110,7 @@ RSpec.describe "As a visitor", type: :feature do
                                             rating: 5,
                                             image: "http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg")
 
-      # no way to test this 
+      # no way to test this
     end
   end
 end
