@@ -65,7 +65,7 @@ describe Pet, type: :model do
         sorted_pets = @shelter_1.pets.sort_by_adoption_status
         expect(sorted_pets.first).to eq(@pet_2)
       end
-    end 
+    end
 
     describe "#applied_for" do
       it "can find pets with applications" do
@@ -164,6 +164,7 @@ describe Pet, type: :model do
                                           zip: '80515',
                                           phone: '6102021418',
                                           description: 'I am a great pet dad.')
+
         application_2 = Application.create!(name: 'Ali Vermeil',
                                           address: '123 Main St',
                                           city: 'Eau Claire',
@@ -181,6 +182,38 @@ describe Pet, type: :model do
         pet_application_1.toggle_approved
 
         expect(@pet_1.approved_application_id).to eq(application.id)
+      end
+    end
+
+    describe "#approved_applications?" do
+      it "can tell if any pet has an approved application" do
+        application = Application.create!(name: 'Jordan Holtkamp',
+                                          address: '123 Main St',
+                                          city: 'Lafayette',
+                                          state: 'CO',
+                                          zip: '80515',
+                                          phone: '6102021418',
+                                          description: 'I am a great pet dad.')
+
+        application_2 = Application.create!(name: 'Ali Vermeil',
+                                          address: '123 Main St',
+                                          city: 'Eau Claire',
+                                          state: 'WI',
+                                          zip: '54701',
+                                          phone: '198765432',
+                                          description: 'I am a great pet mom.')
+
+        @pet_1.applications << application
+        @pet_2.applications << application_2
+
+        pet_application_1 = PetApplication.where(pet_id: @pet_1.id).where(application_id: application.id).first
+        pet_application_2 = PetApplication.where(pet_id: @pet_1.id).where(application_id: application_2.id).first
+
+        expect(Pet.approved_applications?).to eq(false)
+
+        pet_application_1.toggle_approved
+
+        expect(Pet.approved_applications?).to eq(true)
       end
     end
   end
