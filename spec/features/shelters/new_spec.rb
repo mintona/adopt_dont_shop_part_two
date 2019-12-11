@@ -22,6 +22,7 @@ RSpec.describe "As a visitor", type: :feature do
 
     expect(current_path).to eq('/shelters')
 
+    expect(page).to have_content('The shelter has been created!')
     expect(page).to have_content('Lafayette Shelter')
   end
 

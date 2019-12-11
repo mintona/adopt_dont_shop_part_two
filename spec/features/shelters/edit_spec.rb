@@ -50,6 +50,7 @@ RSpec.describe "As a visitor", type: :feature do
     expect(page).to have_content(original_city)
     expect(page).to have_content(original_state)
     expect(page).to have_content(new_zip)
+    expect(page).to have_content("The shelter has been updated!")
   end
 
   describe "If I have an incomplete field" do
