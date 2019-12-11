@@ -50,5 +50,30 @@ RSpec.describe "As a visitor", type: :feature do
     expect(page).to have_content(original_city)
     expect(page).to have_content(original_state)
     expect(page).to have_content(new_zip)
+    expect(page).to have_content("The shelter has been updated!")
+  end
+
+  describe "If I have an incomplete field" do
+    it "gives me a flash message telling me which field is not filled out" do
+      original_name = "Boulder Shelter"
+      original_address = "123 Arapahoe Ave"
+      original_city = "Boulder"
+      original_state = "CO"
+      original_zip = "80301"
+
+      shelter_1 = Shelter.create(name: original_name,
+                                 address: original_address,
+                                 city: original_city,
+                                 state: original_state,
+                                 zip: original_zip)
+
+      visit "/shelters/#{shelter_1.id}/edit"
+
+      fill_in 'Name', with: ''
+      click_button 'Update Shelter'
+
+      expect(page).to have_button("Update Shelter")
+      expect(page).to have_content("Name can't be blank")
+    end
   end
 end
