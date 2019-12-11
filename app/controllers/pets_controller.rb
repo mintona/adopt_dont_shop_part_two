@@ -30,8 +30,14 @@ class PetsController < ApplicationController
 
   def update
     pet = Pet.find(params[:id])
-    pet.update(pet_params)
-    redirect_to "/pets/#{pet.id}"
+    if pet.update(pet_params)
+      flash[:success] = "The information for #{pet.name} has been updated."
+      redirect_to "/pets/#{params[:id]}"
+    else
+      flash[:notice] = pet.errors.full_messages.to_sentence + ". Please fill out all required fields."
+      @pet = Pet.find(params[:id])
+      render :edit
+    end
   end
 
   def destroy
