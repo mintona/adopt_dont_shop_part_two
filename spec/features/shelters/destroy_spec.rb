@@ -88,4 +88,15 @@ RSpec.describe "As a visitor", type: :feature do
       expect(page).to_not have_button('Delete Shelter')
     end
   end
+
+  describe 'If a shelter has reviews and I delete that shelter' do
+    it "the reviews for that shelter are deleted" do
+      review_1 = @shelter_1.reviews.create!(title: "Best Shelter Ever!",
+                                            content: "I had the best experience here. Would recommend!",
+                                            rating: 5,
+                                            image: "http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg")
+
+      # no way to test this 
+    end
+  end
 end
