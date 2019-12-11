@@ -68,7 +68,7 @@ RSpec.describe "As a visitor" do
       it "I see a list of all the names of applicants for the pet" do
         visit "/pets/#{@pet_1.id}"
 
-        click_button "View all applications for #{@pet_1.name}"
+        click_button "View All Applications for #{@pet_1.name}"
 
         expect(current_path).to eq("/pets/#{@pet_1.id}/applications")
 
@@ -77,7 +77,7 @@ RSpec.describe "As a visitor" do
 
         visit "/pets/#{@pet_2.id}"
 
-        click_button "View all applications for #{@pet_2.name}"
+        click_button "View All Applications for #{@pet_2.name}"
 
         expect(page).to have_link(@application.name)
         expect(page).to_not have_link(@application_2.name)
