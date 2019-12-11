@@ -14,7 +14,7 @@ RSpec.describe "As a visitor", type: :feature do
       it "when the shelter has no pets" do
         visit "shelters/#{@shelter_1.id}/pets"
 
-        click_link "Add Pet"
+        click_button "Add Pet"
 
         expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets/new")
       end
@@ -32,7 +32,7 @@ RSpec.describe "As a visitor", type: :feature do
 
         expect(page).to have_content(peacock.name)
 
-        click_link "Add Pet"
+        click_button "Add Pet"
 
         expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets/new")
       end

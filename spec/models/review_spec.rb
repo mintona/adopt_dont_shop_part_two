@@ -6,7 +6,6 @@ RSpec.describe Review, type: :model do
     it { should validate_presence_of :rating }
     it { should validate_presence_of :content }
     it { should validate_presence_of :shelter }
-    # it { should validate_presence_of :image } - this is optional - need research how to do this
   end
 
   describe "relationships" do

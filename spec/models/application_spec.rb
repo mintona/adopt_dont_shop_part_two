@@ -44,13 +44,6 @@ RSpec.describe Application, type: :model do
                           description: pet_2_description,
                           shelter: @shelter_1)
 
-      # pets = [@pet_1, @pet_2]
-
-      # pets.each do |pet|
-      #   visit "/pets/#{pet.id}"
-      #   click_button 'Add to Favorite Pets'
-      # end
-
       application = Application.create!(name: 'Jordan Holtkamp',
                                         address: '123 Main St',
                                         city: 'Lafayette',

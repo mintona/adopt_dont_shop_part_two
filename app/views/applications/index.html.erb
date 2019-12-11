@@ -1,11 +1,10 @@
 <h1>Applicants for Pet</h1>
 <br>
 <% if !@applications.empty? %>
-<ul>
+  <ul>
   <% @applications.each do |application| %>
-  <li>Applicant's Name: <%= link_to "#{application.name}", "/applications/#{application.id}" %></li>
+    <li>Applicant's Name: <%= link_to "#{application.name}", "/applications/#{application.id}" %></li>
   <% end %>
-
 </ul>
 <% else %>
   <%= "There are currently no applications for this pet." %>

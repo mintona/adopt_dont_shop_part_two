@@ -8,6 +8,7 @@ RSpec.describe "As a visitor", type: :feature do
       state: "CO",
       zip: "80301")
   end
+  
   describe "I can delete a shelter" do
 
     it "if it has no pets" do
