@@ -150,5 +150,34 @@ describe Pet, type: :model do
         expect(@pet_1.adoptable).to eq(true)
       end
     end
+
+    describe "#approved_application_id" do
+      it "can find the id of the approved application" do
+        application = Application.create!(name: 'Jordan Holtkamp',
+                                          address: '123 Main St',
+                                          city: 'Lafayette',
+                                          state: 'CO',
+                                          zip: '80515',
+                                          phone: '6102021418',
+                                          description: 'I am a great pet dad.')
+        application_2 = Application.create!(name: 'Ali Vermeil',
+                                          address: '123 Main St',
+                                          city: 'Eau Claire',
+                                          state: 'WI',
+                                          zip: '54701',
+                                          phone: '198765432',
+                                          description: 'I am a great pet mom.')
+
+        @pet_1.applications << application
+        @pet_1.applications << application_2
+
+        pet_application_1 = PetApplication.where(pet_id: @pet_1.id).where(application_id: application.id).first
+        pet_application_2 = PetApplication.where(pet_id: @pet_1.id).where(application_id: application_2.id).first
+
+        pet_application_1.toggle_approved
+
+        expect(@pet_1.approved_application_id).to eq(application.id)
+      end
+    end
   end
 end
