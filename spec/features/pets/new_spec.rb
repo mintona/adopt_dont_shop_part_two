@@ -39,23 +39,25 @@ RSpec.describe "As a visitor", type: :feature do
     end
 
     describe "I click the add pet link to" do
-      it "fill out a form to add a new adoptable pet to that shelter" do
+      before :each do
         pet_1_image = "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg"
-        image = pet_1_image
-        name = "Alex"
-        approximate_age = "10"
-        sex = "Male"
+        @image = pet_1_image
+        @name = "Alex"
+        @approximate_age = "10"
+        @sex = "Male"
         shelter = @shelter_1
-        description = "I am a loveable, snuggly, cat! If you are anti snuggle, look elsewhere. I want to be pet at all times!"
+        @description = "I am a loveable, snuggly, cat! If you are anti snuggle, look elsewhere. I want to be pet at all times!"
+      end
 
+      it "fill out a form to add a new adoptable pet to that shelter" do
         visit "/shelters/#{@shelter_1.id}/pets/new"
 
         expect(page).to have_content('Add a Pet')
 
-        fill_in 'Image', with: image
-        fill_in 'Name', with: name
-        fill_in 'Description', with: description
-        fill_in 'Approximate age', with: approximate_age
+        fill_in 'Image', with: @image
+        fill_in 'Name', with: @name
+        fill_in 'Description', with: @description
+        fill_in 'Approximate age', with: @approximate_age
         select 'Male', from: :sex
 
         click_on 'Add Pet'
@@ -66,10 +68,26 @@ RSpec.describe "As a visitor", type: :feature do
 
         expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets")
 
-        expect(page).to have_content(name)
-        expect(page).to have_content(approximate_age)
-        expect(page).to have_content(sex)
-        expect(page).to have_css("img[src*='#{pet_1_image}']")
+        expect(page).to have_content("Pet has been added.")
+        expect(page).to have_content(@name)
+        expect(page).to have_content(@approximate_age)
+        expect(page).to have_content(@sex)
+        expect(page).to have_css("img[src*='#{@image}']")
+      end
+
+      it "displays an error message if I don't fill out all required fields" do
+        visit "/shelters/#{@shelter_1.id}/pets/new"
+
+        fill_in 'Image', with: @image
+        fill_in 'Name', with: @name
+        fill_in 'Description', with: ''
+        fill_in 'Approximate age', with: @approximate_age
+        select 'Male', from: :sex
+
+        click_button 'Add Pet'
+
+        expect(page).to have_content("Description can't be blank. Please fill out all required fields.")
+        expect(page).to have_button('Add Pet')
       end
     end
   end
