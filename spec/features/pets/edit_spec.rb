@@ -53,6 +53,7 @@ RSpec.describe "As a visitor", type: :feature do
 
           expect(current_path).to eq("/pets/#{@pet_1.id}")
 
+          expect(page).to have_content("The pet's information has been updated.")
           expect(page).to have_content(new_name)
           expect(page).to_not have_content(@original_name)
 
