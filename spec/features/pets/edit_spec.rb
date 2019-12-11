@@ -27,7 +27,7 @@ RSpec.describe "As a visitor", type: :feature do
       click_on 'Update Pet'
 
       expect(current_path).to eq("/pets/#{@pet_1.id}/edit")
-      
+
       expect(page).to have_content("Update #{@pet_1.name}'s Information")
     end
 
@@ -36,7 +36,7 @@ RSpec.describe "As a visitor", type: :feature do
         it "any of the pets information" do
 
           visit "/pets/#{@pet_1.id}/edit"
-          
+
           expect(find_field('Name').value).to eq(@original_name)
           expect(find_field('Image').value).to eq(@original_image)
           expect(find_field('Approximate age').value).to eq(@original_age)
@@ -44,7 +44,7 @@ RSpec.describe "As a visitor", type: :feature do
 
           new_name = "Amber"
           new_age = "9"
-          
+
           fill_in 'Name', with: new_name
           fill_in 'Approximate age', with: new_age
           select 'Female', from: :sex
@@ -64,6 +64,19 @@ RSpec.describe "As a visitor", type: :feature do
 
           expect(page).to have_content(@original_description)
           expect(page).to have_css("img[src*='#{@original_image}']")
+        end
+
+        it "shows an error message if any of the required fields are left blank" do
+          new_name = ""
+
+          visit "/pets/#{@pet_1.id}/edit"
+
+          fill_in 'Name', with: new_name
+
+          click_on 'Update Pet'
+
+          expect(page).to have_button('Update Pet')
+          expect(page).to have_content("Name can't be blank. Please fill out all required fields.")
         end
       end
     end
