@@ -110,7 +110,9 @@ RSpec.describe "As a visitor", type: :feature do
                                             rating: 5,
                                             image: "http://rmpuppyrescue.org/images/spay%20clinic-crop-u1009034_2x.jpg")
 
-      # no way to test this
+      expect(Review.all.last).to eq(review_1)
+      Shelter.destroy(@shelter_1.id)
+      expect(Review.all.last).to_not eq(review_1)
     end
   end
 end
