@@ -14,7 +14,7 @@ class SheltersController < ApplicationController
     shelter = Shelter.new(shelter_params)
     if shelter.save
       redirect_to '/shelters'
-      flash[:success] = "The shelter has been added!"
+      flash[:success] = "The shelter has been created!"
     else
       flash.now[:notice] = shelter.errors.full_messages.to_sentence
       render :new
