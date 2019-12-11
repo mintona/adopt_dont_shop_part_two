@@ -48,6 +48,7 @@ class PetsController < ApplicationController
       render :show
     else
       Pet.destroy(params[:id])
+      favorites_list.remove(params[:id])
       redirect_to '/pets'
     end
   end
