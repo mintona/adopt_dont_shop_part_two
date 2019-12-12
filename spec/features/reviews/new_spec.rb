@@ -76,11 +76,12 @@ RSpec.describe "As a visitor" do
       expect(page).to have_content(flash)
     end
 
-    it 'allows me to post a review without an image' do
+    it 'allows me to post a review without an image using a default image' do
       title = "Great shelter!"
       rating = 5
       content = "I got the best lil pup from this place and the staff was super helpful!"
       flash = "Your review has been posted."
+      default_image = "https://graphicriver.img.customer.envatousercontent.com/files/246499059/CartoonDogHouse%20p.jpg?auto=compress%2Cformat&q=80&fit=crop&crop=top&max-h=8000&max-w=590&s=9f00414c5801c1dc1187e46311a2a1dc"
 
       visit "/shelters/#{@shelter_1.id}/reviews/new"
 
@@ -96,6 +97,7 @@ RSpec.describe "As a visitor" do
       expect(page).to have_content(rating)
       expect(page).to have_content(content)
       expect(page).to have_content("Your review has been posted.")
+      expect(page).to have_css("img[src*='#{default_image}']")
     end
   end
 end
