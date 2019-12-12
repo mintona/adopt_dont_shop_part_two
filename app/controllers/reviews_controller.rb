@@ -8,6 +8,9 @@ class ReviewsController < ApplicationController
     review.shelter_id = params[:shelter_id]
 
     if review.save
+      if params[:image] == ""
+        review.update!(image: default_image)
+      end
       flash[:success] = 'Your review has been posted.'
       redirect_to "/shelters/#{params[:shelter_id]}"
     else
@@ -43,5 +46,9 @@ class ReviewsController < ApplicationController
   private
   def review_params
     params.permit(:title, :rating, :content, :image)
+  end
+
+  def default_image
+    "https://graphicriver.img.customer.envatousercontent.com/files/246499059/CartoonDogHouse%20p.jpg?auto=compress%2Cformat&q=80&fit=crop&crop=top&max-h=8000&max-w=590&s=9f00414c5801c1dc1187e46311a2a1dc"
   end
 end
