@@ -2,10 +2,10 @@
 
 ## Background and Description
 
-"Adopt Don't Shop: Part Two" is a fictitious pet adoption platform where visitors can leave shelter reviews, favorite pets and apply to adopt their newest furry friend. The basic CRUD functionality for pets and shelters was completed as a solo project. The paired extension adds shelter reviews, favorite pets and adoption functionalities.
+"Adopt Don't Shop: Part Two" is a fictitious pet adoption platform where visitors can leave shelter reviews, favorite pets and apply to adopt their newest furry friend. The basic CRUD functionality for pets and shelters was completed as a solo project. The paired extension adds shelter reviews, favorite pets, and adoption functionalities.
 
 This project was completed to achieve the following learning goals:
-* Use MVC architecture to organize code effectively and according to convention
+* Use MVC architecture to organize code effectively and according to standard convention
 * Use flash messages to alert users of their actions for adding, updating and deleting resources
 * Incorporate POROs to organize code for objects not stored in the database 
 * Utilize one-to-many and many-to-many relationships
@@ -13,7 +13,7 @@ This project was completed to achieve the following learning goals:
 * Implement to RESTful routing
 * Use cookies/sessions to create and maintain state
 
-## Use Adpot Don't Shop
+## Use Adopt Don't Shop
 
 ### Implementation
 #### Access Locally
@@ -50,7 +50,7 @@ Application details can be found on an application's show page.
 
 ## Testing
 
-Adopt Don't Shop was built using TDD and is fulling tested on both the model and feature level using an [RSpec](https://github.com/rspec/rspec) testing suite with [Capybara](https://github.com/teamcapybara/capybara) for feature testing and [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) for model testing. Specific empahsis was placed on sad path testing at the feagure level. 
+Adopt Don't Shop was built using TDD and is fulling tested on both the model and feature level using an [RSpec](https://github.com/rspec/rspec) testing suite with [Capybara](https://github.com/teamcapybara/capybara) for feature testing and [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) for model testing. Specific emphasis was placed on sad path testing at the feature level. 
 
 ## Built With
 * Ruby on Rails - web framework
